@@ -20,6 +20,13 @@ Array.prototype.firstOrDefault = function (fn) {
     return array[0];
 };
 
+Array.prototype.first = function (fn) {
+    var result = this.firstOrDefault(fn);
+    if (result === undefined || result === null) {
+        throw 'Result does not contain any members';
+    }
+    return result;
+};
 
 Array.prototype.select = function (fn) {
     var array = this;
@@ -57,6 +64,21 @@ Array.prototype.forEach = function (fn) {
     for (var index = 0; index < array.length; ++index) {
         fn(array[index], index);
     }
+};
+
+Array.prototype.reduce = function (accum, fn) {
+    var array = this;
+    for (var index = 0; index < array.length; ++index) {
+        accum = fn(accum, array[index], index);
+    }
+    return accum;
+};
+
+Array.prototype.sum = function () {
+    var array = this;
+    return array.reduce(0, function (accum, element, index) {
+        return accum + element;
+    });
 };
 
 var mergeSelect = function(array1, array2, fn) {

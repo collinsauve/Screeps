@@ -1,51 +1,41 @@
-var log = false;
-module.exports = function creepFactory(spawn, roles, buildInstructions) {
+var calculateBuildCost = require('calculateBuildCost');
+module.exports = function creepFactory (spawn, roles, buildInstructions) {
     var roleCounter = require('roleCounter');
     var roleCounts = roleCounter(roles);
     var building = false;
-
-    function isBuilding() {
-        return building || (spawn.spawning !== undefined && spawn.spawning !== null);
+    var waiting = false;
+    
+    function canBuild () {
+        return !building && !waiting && (spawn.spawning === undefined || spawn.spawning === null);
+    }
+    
+    function build (role, reason) {
+        if (!canBuild()) {
+            return;
+        }    
+        var buildCost = calculateBuildCost(role.body)
+        console.log('buildCost = ' + buildCost + '; spawn.energy = ' + spawn.energy + ';');
+        if (buildCost > spawn.energy) {
+            console.log('Not enough energy to build creep from ' + reason + ' of \'' + role.name + '\'.  ');
+            waiting = true;
+            return;
+        }
+        console.log('Creating creep from ' + reason + ' of \'' + role.name + '\'');
+        spawn.createCreep(role.body, undefined, { role: role.name });
+        building = true;
     }
     
     buildInstructions.order.forEach( function(roleName, index) {
-        if (log) {
-            console.log('looking at buildInstruction.order[' + index + '] of \'' + roleName + '\'');
-        }
-        
-        if (isBuilding()) {
-            return;
-        }
-        
-        var role = roles.firstOrDefault( function (r) { return r.name === roleName; } );
-        var roleCount = roleCounts.firstOrDefault( function (rc) { return rc.role.name === roleName; } );
-        if (role === undefined || role === null || roleCount === undefined || roleCount === null) {
-            console.log('Warning: Could not understand buildInstructions.order[' + index + '] of \'' + roleName + '\'');
-            return;
-        }
-
+        var role = roles.first( function (r) { return r.name === roleName; } );
+        var roleCount = roleCounts.first( function (rc) { return rc.role.name === roleName; } );
         if (roleCount.count < 1) {
-            console.log('Creating creep from buildInstruction.order[' + index + '] of \'' + role.name + '\'');
-            spawn.createCreep(role.body, undefined, { role: role.name });
-            building = true;
+            build(role, 'buildInstructions.order[' + index + ']');
             return;
         }
         
-        if (log) {
-            console.log('decrementing roleCount.count for buildInstruction.order[' + index + '] of \'' + roleName + '\'.  Current count is ' + roleCount.count);
-        }        
         roleCount.count--;
     });
     
-    if (isBuilding()) {
-        return;
-    }
-    
-    var role = roles.firstOrDefault( function (r) { return r.name === buildInstructions.infinite; } );
-    if (role === undefined || role === null) {
-        console.log('Warning: Could not understand buildInstructions.infinite of \'' + buildInstructions.infinite + '\'');
-        return;
-    }
-    console.log('Creating creep from buildInstruction.infinite of \'' + buildInstructions.infinite + '\'');
-    spawn.createCreep(role.body, undefined, { role: role.name });
+    var role = roles.first( function (r) { return r.name === buildInstructions.infinite; } );
+    build(role, 'buildInstruction.infinite');
 };
