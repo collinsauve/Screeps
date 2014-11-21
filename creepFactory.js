@@ -1,3 +1,4 @@
+var log = false;
 var calculateBuildCost = require('calculateBuildCost');
 module.exports = function creepFactory (spawn, roles, buildInstructions) {
     var roleCounter = require('roleCounter');
@@ -14,9 +15,13 @@ module.exports = function creepFactory (spawn, roles, buildInstructions) {
             return;
         }    
         var buildCost = calculateBuildCost(role.body)
-        console.log('buildCost = ' + buildCost + '; spawn.energy = ' + spawn.energy + ';');
+        if (log) {
+            console.log('buildCost = ' + buildCost + '; spawn.energy = ' + spawn.energy + ';');
+        }
         if (buildCost > spawn.energy) {
-            console.log('Not enough energy to build creep from ' + reason + ' of \'' + role.name + '\'.  ');
+            if (log) {
+                console.log('Not enough energy to build creep from ' + reason + ' of \'' + role.name + '\'.  ');
+            }
             waiting = true;
             return;
         }
