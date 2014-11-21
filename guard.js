@@ -1,7 +1,7 @@
 module.exports = function guard(creep) {		
-	var targets = creep.room.find(Game.HOSTILE_CREEPS);
-	if(targets.length) {
-		creep.moveTo(targets[0]);
-		creep.attack(targets[0]);
+	var target = creep.pos.findNearest(Game.HOSTILE_CREEPS);
+	if (target !== undefined && target !== null) {
+		creep.moveTo(target);
+		creep.attack(target);
 	}
 }
