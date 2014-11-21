@@ -13,7 +13,7 @@ if (spawn === undefined || spawn === null) {
 var buildInstructions = {
     order: [
         'harvester', 'harvester', 'harvester', 
-        'guard', 'healer', 'harvester', 
+        'guard', 'healer',
         'guard', 'healer'
     ],
     infinite: 'guard'
