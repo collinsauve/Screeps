@@ -5,5 +5,14 @@ require('linq');
 
 var spawn = Game.spawns.Spawn1;
 
+
+var buildInstructions = {
+    order: [
+        'harvester', 'harvester', 'harvester', 'harvester', 
+        'guard', 'guard'
+    ],
+    infinite: 'guard'
+};
+
 roleExecutor(roles);
-creepFactory(spawn, roles);
+creepFactory(spawn, roles, buildInstructions);

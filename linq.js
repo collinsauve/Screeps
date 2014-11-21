@@ -55,7 +55,7 @@ Array.prototype.max = function (fn) {
 Array.prototype.forEach = function (fn) {
     var array = this;
     for (var index = 0; index < array.length; ++index) {
-        fn(array[index]);
+        fn(array[index], index);
     }
 };
 

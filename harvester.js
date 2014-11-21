@@ -1,4 +1,4 @@
-module.exports = function (creep) {
+module.exports = function harvester(creep) {
 	if(creep.energy < creep.energyCapacity) {
 		var sources = creep.room.find(Game.SOURCES);
 		creep.moveTo(sources[0]);
