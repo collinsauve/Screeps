@@ -12,7 +12,7 @@ module.exports = [
     {
         name: 'guard',
         execution: require('guard'),
-        body: [Game.TOUGH, Game.TOUGH, Game.ATTACK, Game.MOVE, Game.MOVE],
+        body: [Game.TOUGH, Game.TOUGH, Game.TOUGH, Game.ATTACK, Game.MOVE],
     },
     {
         name: 'healer',
