@@ -11,7 +11,7 @@ Array.prototype.where = function (fn) {
 
 Array.prototype.firstOrDefault = function (fn) {
     var array = this;
-    if (fn !== null) {
+    if (fn !== undefined && fn !== null) {
         array = array.where(fn);
     }
     if (array.length == 0) {
