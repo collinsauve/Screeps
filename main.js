@@ -8,8 +8,9 @@ var spawn = Game.spawns.Spawn1;
 
 var buildInstructions = {
     order: [
-        'harvester', 'harvester', 'harvester', 'harvester', 
-        'guard', 'guard'
+        'harvester', 'harvester', 'harvester', 
+        'guard', 'healer', 'harvester', 
+        'guard', 'healer'
     ],
     infinite: 'guard'
 };
