@@ -5,8 +5,8 @@ module.exports = function harvester(creep) {
     if(creep.energy < creep.energyCapacity) {
 		var target = creep.pos.findNearest(Game.SOURCES, { filter: hasEnergyFilter });
         if (target !== undefined && target !== null) {
-            creep.moveTo(sources[0]);
-            creep.harvest(sources[0]);
+            creep.moveTo(target);
+            creep.harvest(target);
 		}
 	} else {
 		creep.moveTo(Game.spawns.Spawn1);
