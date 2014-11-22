@@ -68,6 +68,7 @@ function followClosestFriendlyRole(creep, targetRole) {
     }
 
     logAction(creep, 'following', target);
+    creep.moveTo(target);
     return true;
 }
 
