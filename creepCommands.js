@@ -1,7 +1,7 @@
 ﻿var creepUtil = require('creepUtil');
 
 var log = false;
-var protectionRadius = 10;
+var protectionRadius = 5;
 
 function logAction(creep, action, target) {
     if (!log) {
@@ -23,6 +23,7 @@ function attackNearestHostile(creep) {
         creep.moveTo(target);
     }
     creep.attack(target);
+    creep.rangedAttack(target);
     
     return true;
 }
