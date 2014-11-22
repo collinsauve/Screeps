@@ -36,6 +36,19 @@ Array.prototype.select = function (fn) {
     }
     return result;
 };
+
+Array.prototype.selectMany = function (fn) {
+    var array = this;
+    var result1 = array.select(fn);
+    var result2 = [];
+    result1.forEach(function (a) {
+        a.forEach(function(b) {
+            result2.push(b);
+        });
+    });
+    return result2;
+};
+
 Array.prototype.min = function (fn) {
     var array = this;
     var result = null;
@@ -51,7 +64,7 @@ Array.prototype.max = function (fn) {
     var array = this;
     var result = null;
     for (var i = 0; i < array.length; i++) {
-        var thisResult = fn(array[i]);
+        var thisResult = fn === undefined ? array[i] : fn(array[i]);
         if (result == null || thisResult > result ) {
             result = thisResult;
         }

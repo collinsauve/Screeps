@@ -15,9 +15,12 @@ var buildInstructions = {
     order: [
         'miner', 'hauler', 'hauler', 
         'guard', 'healer',
-        'guard', 'healer'
+        'guard', 'healer', 'archer',
+        'guard', 'healer', 'archer',
+        'guard', 'healer', 'archer',
+        'guard', 'guard'
     ],
-    infinite: 'guard'
+    infinite: 'archer'
 };
 
 roleExecutor(roles);

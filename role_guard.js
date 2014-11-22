@@ -1,3 +1,5 @@
+var creepUtil = require('creepUtil');
+
 var log = false;
 module.exports = {
     name: 'guard',
@@ -5,7 +7,7 @@ module.exports = {
     execution: function guard(creep) {
 
         // Attack nearest hostile
-        var target = creep.pos.findNearest(Game.HOSTILE_CREEPS);
+        var target = creep.pos.findNearest(Game.HOSTILE_CREEPS, { filter: creepUtil.shouldChaseFilter(creep, 10) });
         if (target !== undefined && target !== null) {
             if (log) {
                 console.log('guard ' + creep.name + ' attacking ' + target.name);

@@ -26,7 +26,7 @@ module.exports = {
         target = creep.pos.findNearest(Game.MY_CREEPS, { filter: guardFilter });
         if(target !== undefined && target !== null) {
             if (log) {
-                console.log('healer ' + creep.name + ' following ' + target.name);
+                console.log('healer ' + creep.name + ' following guard' + target.name);
             }
             creep.moveTo(target);
             return;
