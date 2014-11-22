@@ -7,6 +7,7 @@ module.exports = {
         creepCommands.attackNearestHostile(creep) ||
         creepCommands.followClosestFriendlyRole(creep, 'healer') ||
         creepCommands.followClosestFriendlyRole(creep, 'guard') ||
+        creepCommands.returnToNearestFlag(creep) ||
         creepCommands.returnToNearestSpawn(creep);
     }
 };

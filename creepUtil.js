@@ -24,7 +24,7 @@ function shouldChaseFilter(creep, protectionRadius) {
 
 function firingRange(creep) {
     function partRange(part) {
-        switch (part) {
+        switch (part.type) {
             case Game.RANGED_ATTACK:
                 return 3;
             case Game.ATTACK:

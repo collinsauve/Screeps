@@ -5,6 +5,7 @@ module.exports = {
     body: [Game.TOUGH, Game.TOUGH, Game.TOUGH, Game.MOVE, Game.ATTACK],
     execution: function guard(creep) {
         creepCommands.attackNearestHostile(creep) ||
+        creepCommands.returnToNearestFlag(creep) ||
         creepCommands.returnToNearestSpawn(creep);
     }
 };
