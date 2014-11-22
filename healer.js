@@ -21,4 +21,11 @@ module.exports = function healer(creep) {
         creep.moveTo(target);
         return;
     }
+    
+    // Move back to the spawn
+    target = creep.pos.findNearest(Game.MY_SPAWNS);
+    if(target !== undefined && target !== null) {
+        creep.moveTo(target);
+        return;
+    }
 }
