@@ -1,11 +1,28 @@
+var log = false;
 module.exports = {
     name: 'guard',
     body: [Game.TOUGH, Game.TOUGH, Game.TOUGH, Game.MOVE, Game.ATTACK],
-    execution: function guard(creep) {		
+    execution: function guard(creep) {
+
+        // Attack nearest hostile
         var target = creep.pos.findNearest(Game.HOSTILE_CREEPS);
         if (target !== undefined && target !== null) {
+            if (log) {
+                console.log('guard ' + creep.name + ' attacking ' + target.name);
+            }
             creep.moveTo(target);
             creep.attack(target);
+            return;
+        }
+        
+        // Return to spawn
+        target = creep.pos.findNearest(Game.MY_SPAWNS);
+        if(target !== undefined && target !== null) {
+            if (log) {
+                console.log('guard ' + creep.name + ' returning to ' + target.name);
+            }
+            creep.moveTo(target);
+            return;
         }
     }
 };
