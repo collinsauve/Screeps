@@ -12,12 +12,28 @@ function logAction(creep, action, target) {
     console.log(creep.name + '(' + creep.memory.role + ') ' + action + suffix + '.'); 
 }
 
-function attackNearestHostile(creep) {
+function attackNearestHostileCreep(creep) {
     var target = creep.pos.findNearest(Game.HOSTILE_CREEPS, { filter: creepUtil.shouldChaseFilter(creep, protectionRadius) });
     if (target === undefined || target === null) {
         return false;
     }
 
+    logAction(creep, 'attacking', target);
+    if (!creep.pos.inRangeTo(target.pos, creepUtil.firingRange(creep))) {
+        creep.moveTo(target);
+    }
+    creep.attack(target);
+    creep.rangedAttack(target);
+    
+    return true;
+}
+
+function attackNearestHostileSpawn(creep) {
+    var target = creep.pos.findNearest(Game.HOSTILE_SPAWNS);
+    if (target === undefined || target === null) {
+        return false;
+    }
+    
     logAction(creep, 'attacking', target);
     if (!creep.pos.inRangeTo(target.pos, creepUtil.firingRange(creep))) {
         creep.moveTo(target);
@@ -73,7 +89,8 @@ function followClosestFriendlyRole(creep, targetRole) {
 }
 
 module.exports = {
-    attackNearestHostile: attackNearestHostile,
+    attackNearestHostileCreep: attackNearestHostileCreep,
+    attackNearestHostileSpawn: attackNearestHostileSpawn,
     healNearestDamagedFriendly: healNearestDamagedFriendly,
     returnToNearestFlag: returnToNearestFlag,
     returnToNearestSpawn: returnToNearestSpawn,
