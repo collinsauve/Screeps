@@ -1,6 +1,6 @@
 ﻿var creepUtil = require('creepUtil');
 
-var log = false;
+var log = true;
 var protectionRadius = 5;
 
 function logAction(creep, action, target) {
@@ -12,85 +12,106 @@ function logAction(creep, action, target) {
     console.log(creep.name + '(' + creep.memory.role + ') ' + action + suffix + '.'); 
 }
 
-function attackNearestHostileCreep(creep) {
-    var target = creep.pos.findNearest(Game.HOSTILE_CREEPS, { filter: creepUtil.shouldChaseFilter(creep, protectionRadius) });
+function action(creep, target, actionMessage, actionFunction) {
     if (target === undefined || target === null) {
         return false;
     }
+    
+    logAction(creep, actionMessage, target);
+    actionFunction(target);
+    
+    return true;   
+}
 
-    logAction(creep, 'attacking', target);
+function actionAny(creep, gameType, opts, actionMessage, actionFunction) {
+    var targets = creep.room.find(gameType, opts);
+    if (!targets.length) {
+        return false;
+    }
+    
+    var target = targets[0];
+    logAction(creep, actionMessage, target);
+    actionFunction(target);
+    
+    return true;  
+}
+
+function actionNearest(creep, gameType, opts, actionMessage, actionFunction) {
+    var target = creep.pos.findNearest(gameType, opts);
+    if (target === undefined || target === null) {
+        return false;
+    }
+    
+    logAction(creep, actionMessage, target);
+    actionFunction(target);
+    
+    return true;   
+}
+
+function attack(creep, target) {
     if (!creep.pos.inRangeTo(target.pos, creepUtil.firingRange(creep))) {
         creep.moveTo(target);
     }
     creep.attack(target);
-    creep.rangedAttack(target);
-    
-    return true;
+    creep.rangedAttack(target); 
+}
+
+function attackNearest(creep, gameType, opts, messageType) {
+    return actionNearest(creep, gameType, opts, 'attacking ' + messageType, function(target) {
+        attack(creep, target);
+    });
+}
+
+function attackAny(creep, gameType, opts, messageType) {
+    return actionAny(creep, gameType, opts, 'attacking ' + messageType, function (target) {
+        attack(creep, target);
+    });
+}
+
+function moveToNearest(creep, gameType, opts, messageType) {
+    return actionNearest(creep, gameType, opts, 'moving to ' + messageType, function (target) {
+        creep.moveTo(target);
+    });    
+}
+
+function attackNearestHostileCreep(creep) {
+    return attackNearest(creep, Game.HOSTILE_CREEPS, { filter: creepUtil.shouldChaseFilter(creep, protectionRadius) }, 'creep');
 }
 
 function attackNearestHostileSpawn(creep) {
-    var target = creep.pos.findNearest(Game.HOSTILE_SPAWNS);
-    if (target === undefined || target === null) {
-        return false;
-    }
-    
-    logAction(creep, 'attacking', target);
-    if (!creep.pos.inRangeTo(target.pos, creepUtil.firingRange(creep))) {
-        creep.moveTo(target);
-    }
-    creep.attack(target);
-    creep.rangedAttack(target);
-    
-    return true;
+    return attackNearest(creep, Game.HOSTILE_CREEPS, { ignoreCreeps: true }, 'spawn');
+}
+
+function attackAnyHostileSpawn(creep) {
+    return attackAny(creep, Game.HOSTILE_CREEPS, null, 'spawn');
 }
 
 function healNearestDamagedFriendly(creep) {
-    var target = creep.pos.findNearest(Game.MY_CREEPS, { filter: function (t) { return t.hits < t.hitsMax && creep.name !== t.name; } });
-    if (target === undefined || target === null) {
-        return false;
-    }
-    
-    logAction(creep, 'healing', target);
-    creep.moveTo(target);
-    creep.heal(target);
-    
-    return true;
+    function damagedFriendlyFilter(t) { return t.hits < t.hitsMax && creep.name !== t.name; }
+    return actionNearest(creep, Game.MY_CREEPS, { filter: damagedFriendlyFilter }, 'healing', function(target) {
+        creep.moveTo(target);
+        creep.heal(target);
+    });
 }
 
 function returnToNearestFlag(creep) {
-    var target = creep.pos.findNearest(Game.FLAGS, { ignoreCreeps: true });
-    if (target === undefined || target === null) {
-        return false;
-    }
-    logAction(creep, 'returning to flag', target);
-    creep.moveTo(target);
-    return true;
+    return moveToNearest(creep, Game.FLAGS, { ignoreCreeps: true }, 'flag');
 }
 
 function returnToNearestSpawn(creep) {
-    var target = creep.pos.findNearest(Game.MY_SPAWNS, { ignoreCreeps: true });
-    if (target === undefined || target === null) {
-        return false;
-    }
-    logAction(creep, 'returning to spawn', target);
-    creep.moveTo(target);
-    return true;
+    return moveToNearest(creep, Game.MY_SPAWNS, { ignoreCreeps: true }, 'spawn');
+
 }
 
 function followClosestFriendlyRole(creep, targetRole) {
-    var target = creep.pos.findNearest(Game.MY_CREEPS, { filter: function(t) { return t.memory.role == targetRole; } });
-    if (target === undefined || target === null) {
-        return false;
-    }
-
-    logAction(creep, 'following', target);
-    creep.moveTo(target);
-    return true;
+    function roleFilter(t) { return t.memory.role == targetRole; }
+    return moveToNearest(creep, Game.MY_CREEPS, { filter: roleFilter }, targetRole);
 }
 
 module.exports = {
     attackNearestHostileCreep: attackNearestHostileCreep,
     attackNearestHostileSpawn: attackNearestHostileSpawn,
+    attackAnyHostileSpawn: attackAnyHostileSpawn,
     healNearestDamagedFriendly: healNearestDamagedFriendly,
     returnToNearestFlag: returnToNearestFlag,
     returnToNearestSpawn: returnToNearestSpawn,

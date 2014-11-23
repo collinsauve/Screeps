@@ -6,6 +6,7 @@ module.exports = {
     execution: function guard(creep) {
         creepCommands.attackNearestHostileCreep(creep) ||
         creepCommands.attackNearestHostileSpawn(creep) ||
+        creepCommands.attackAnyHostileSpawn(creep) ||
         creepCommands.returnToNearestFlag(creep) ||
         creepCommands.returnToNearestSpawn(creep);
     }
