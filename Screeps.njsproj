@@ -17,6 +17,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="README.md" />
+    <Compile Include="ai\findAttack.js" />
+    <Compile Include="ai\healer.js" />
+    <Compile Include="ai\main.js" />
     <Compile Include="calculateBuildCost.js" />
     <Compile Include="creepCommands.js" />
     <Compile Include="creepFactory.js" />
@@ -37,7 +40,9 @@
     <Compile Include="role_miner.js" />
     <Compile Include="spawnFactory.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ai\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
   <ProjectExtensions>
