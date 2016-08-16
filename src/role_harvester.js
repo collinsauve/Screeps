@@ -6,8 +6,8 @@ module.exports = (function () {
             function hasEnergyFilter(source) {
                 return source.energy > 0;
             }
-            if(creep.energy < creep.energyCapacity) {
-                var target = creep.pos.findNearest(Game.SOURCES, { filter: hasEnergyFilter });
+            if(_.sum(creep.carry) < creep.carryCapacity) {
+                var target = creep.pos.findClosestByPath(FIND_SOURCES, { filter: hasEnergyFilter });
                 if (target !== undefined && target !== null) {
                     creep.moveTo(target);
                     creep.harvest(target);
