@@ -1,4 +1,4 @@
-require('linq');
+require('linq')();
 
 var roles = require('roles')();
 var roleExecutor = require('roleExecutor');
