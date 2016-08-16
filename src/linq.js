@@ -1,6 +1,6 @@
 module.exports = () => {
 
-    var mergeSelect = function(array1, array2, fn) {
+    function mergeSelect(array1, array2, fn) {
         var result = [];
         if (array1.length != array2.length) {
             throw "Cannot merge arrays of different lengths";
@@ -11,50 +11,41 @@ module.exports = () => {
         return result;
     };
 
+    function reduce(array, accum, fn) {
+        for (var index = 0; index < array.length; ++index) {
+            accum = fn(accum, array[index], index);
+        }
+        return accum;
+    };
+
+    function firstOrDefault(array, fn) {
+        if (fn !== undefined && fn !== null) {
+            array = array.filter(fn);
+        }
+        if (array.length == 0) {
+            return null;
+        }
+        return array[0];
+    }
+
     return {
-        selectMany: function (fn) {
-            var array = this;
+        selectMany: function (array, fn) {
             var result1 = array.select(fn);
             var result2 = [];
-            result1.forEach(function (a) {
-                a.forEach(function(b) {
-                    result2.push(b);
-                });
-            });
+            result1.forEach(a => a.forEach(b => result2.push(b)));
             return result2;
         },
-        reduce: function (accum, fn) {
-            var array = this;
-            for (var index = 0; index < array.length; ++index) {
-                accum = fn(accum, array[index], index);
-            }
-            return accum;
-        },
-        sum: function () {
-            var array = this;
-            return array.reduce(0, function (accum, element, index) {
-                return accum + element;
-            });
-        },
-        firstOrDefault: function (fn) {
-            var array = this;
-            if (fn !== undefined && fn !== null) {
-                array = array.where(fn);
-            }
-            if (array.length == 0) {
-                return null;
-            }
-            return array[0];
-        },
-        first: function (fn) {
-            var result = this.firstOrDefault(fn);
+        reduce: reduce,
+        sum: array => reduce(0, (accum, element, index) => accum + element),
+        firstOrDefault: firstOrDefault,
+        first: function (array) {
+            var result = firstOrDefault(array, fn);
             if (result === undefined || result === null) {
                 throw 'Result does not contain any members';
             }
             return result;
         },
-        min: function (fn) {
-            var array = this;
+        min: function (array, fn) {
             var result = null;
             for (var i = 0; i < array.length; i++) {
                 var thisResult = fn(array[i]);
@@ -64,8 +55,7 @@ module.exports = () => {
             }
             return result;
         },
-        max: function (fn) {
-            var array = this;
+        max: function (array, fn) {
             var result = null;
             for (var i = 0; i < array.length; i++) {
                 var thisResult = fn === undefined ? array[i] : fn(array[i]);

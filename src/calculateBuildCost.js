@@ -11,5 +11,5 @@ module.exports = function calculateBuildCost(parts) {
     ];
     
     var partCosts = parts.map(p => _.first(costs.filter(c => c.part === p)).cost);
-    return partCosts.sum();
+    return _.sum(partCosts);
 }
