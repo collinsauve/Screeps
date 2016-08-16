@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    var log = require("log", "creepFactory");
+    var log = require("log")("creepFactory");
     var calculateBuildCost = require('calculateBuildCost');
     var roleCounter = require('roleCounter');    
     var building = false;
@@ -30,7 +30,7 @@ module.exports = (function () {
     return (spawn, roles, buildInstructions) => {
 
         var roleCounts = roleCounter(roles);
-        buildInstructions.order.forEach( function(roleName, index) {
+        buildInstructions.order.forEach((roleName, index) => {
             var role = _.first(roles, r => r.name === roleName);
             var roleCount = _.first(roleCounts, rc => rc.role.name === roleName);
             if (roleCount.count < 1) {
