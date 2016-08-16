@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    var log = require("log")("creepFactory");
+    var log = require("logger")("creepFactory");
     var calculateBuildCost = require('calculateBuildCost');
     var roleCounter = require('roleCounter');    
     var building = false;
