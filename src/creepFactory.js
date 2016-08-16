@@ -40,7 +40,9 @@ module.exports = function creepFactory (spawn, roles, buildInstructions) {
         
         roleCount.count--;
     });
-    
-    var role = roles.first( function (r) { return r.name === buildInstructions.infinite; } );
-    build(role, 'buildInstruction.infinite');
+
+    if (buildInstructions.infinite !== undefined && buildInstructions.infinite !== null) {
+        var role = roles.first(function(r) { return r.name === buildInstructions.infinite; });
+        build(role, 'buildInstruction.infinite');
+    }
 };

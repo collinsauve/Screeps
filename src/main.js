@@ -13,12 +13,12 @@ if (spawn === undefined || spawn === null) {
 
 var buildInstructions = {
     order: [
-        'miner', 'hauler', 'hauler', 
-        'guard', 'healer',
-        'guard', 'healer', 'archer',
-        'guard', 'healer', 'archer',
-        'guard', 'healer', 'archer',
-        'guard', 'guard'
+        'miner', 'hauler', 'hauler'//, 
+        //'guard', 'healer',
+        //'guard', 'healer', 'archer',
+        //'guard', 'healer', 'archer',
+        //'guard', 'healer', 'archer',
+        //'guard', 'guard'
     ],
     infinite: 'archer'
 };

@@ -16,10 +16,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Compile Include="src\_referencs.js" />
     <Content Include="ScreepsAutocomplete\Config\SublimeCodeIntel.json" />
     <Content Include="ScreepsAutocomplete\Readme.md" />
-    <Compile Include="ScreepsAutocomplete\_references.js" />
+    <Compile Include="_references.js" />
     <Content Include="README.md" />
     <Compile Include="ai\findAttack.js" />
     <Compile Include="ai\healer.js" />
