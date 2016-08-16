@@ -1,4 +1,5 @@
-module.exports = function calculateBuildCost(parts) {	
+module.exports = function calculateBuildCost(parts) {
+    var _ = require('linq');	
     var costs = [
         { part: MOVE, cost: 50 },
         { part: WORK, cost: 20 },
@@ -9,8 +10,6 @@ module.exports = function calculateBuildCost(parts) {
         { part: TOUGH, cost: 5 }
     ];
     
-    var partCosts = parts.select( function (p) { 
-        return costs.first(c => c.part === p).cost;
-    });
+    var partCosts = parts.map(p => _.first(costs.filter(c => c.part === p)).cost);
     return partCosts.sum();
 }
