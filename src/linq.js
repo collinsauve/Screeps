@@ -39,7 +39,7 @@ module.exports = (function () {
         reduce: reduce,
         sum: array => reduce(0, (accum, element, index) => accum + element),
         firstOrDefault: firstOrDefault,
-        first: function (array) {
+        first: function (array, fn) {
             var result = firstOrDefault(array, fn);
             if (result === undefined || result === null) {
                 throw 'Result does not contain any members';
