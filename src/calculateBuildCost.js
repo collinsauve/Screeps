@@ -1,5 +1,5 @@
 module.exports = function calculateBuildCost(parts) {
-    var _ = require('linq');	
+    var _ = require('linq')();	
     var costs = [
         { part: MOVE, cost: 50 },
         { part: WORK, cost: 20 },
