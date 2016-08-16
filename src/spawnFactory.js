@@ -1,7 +1,7 @@
 module.exports = (function () { 
 
     var log = false;
-    var _ = require('linq')();	
+    var _ = require('linq');	
 
     return (x, y) => {	
         var spawns = Object.keys(Game.spawns);
