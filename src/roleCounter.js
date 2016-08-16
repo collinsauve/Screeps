@@ -1,14 +1,4 @@
-module.exports = function roleCounter(roles) {
-
-    var creepRole = require('creepRole');
-    var log = false;
-
-    var roleCounts = roles.map(r => {
-        return {
-            role: r,
-            count: 0
-        };
-    });
+module.exports = (function () {
     
     function count(creep, role) {
         roleCounts.filter(rc => rc.role === role)
@@ -19,11 +9,23 @@ module.exports = function roleCounter(roles) {
         console.log(roleCount.role.name + ' = ' + roleCount.count);
     }
     
-    creepRole(roles, count); 
-    
-    if (log) {
-        roleCounts.forEach(logRoleCount);
+    return (roles) => {
+        var creepRole = require('creepRole');
+        var log = false;
+
+        var roleCounts = roles.map(r => {
+            return {
+                role: r,
+                count: 0
+            };
+        });
+        
+        creepRole(roles, count); 
+        
+        if (log) {
+            roleCounts.forEach(logRoleCount);
+        }
+        
+        return roleCounts;
     }
-    
-    return roleCounts;
-};
+}());

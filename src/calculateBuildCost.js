@@ -1,4 +1,4 @@
-module.exports = (() => {
+module.exports = (function () {
     var _ = require('linq')();	
     var costs = [
         { part: MOVE, cost: 50 },

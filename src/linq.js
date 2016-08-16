@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = (function () {
 
     function mergeSelect(array1, array2, fn) {
         var result = [];
@@ -67,4 +67,4 @@ module.exports = () => {
             return result;
         }           
     }
-};
+}());

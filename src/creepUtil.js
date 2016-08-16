@@ -1,4 +1,4 @@
-﻿module.exports = () => {
+﻿module.exports = (function () {
 
     var _ = require('linq');
 
@@ -50,4 +50,4 @@
         // Determines the firing range of a creep
         firingRange: firingRange
     };
-}
+})();

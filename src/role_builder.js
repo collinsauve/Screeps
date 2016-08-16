@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = (function () {
     return {
         name: 'builder',
         body: [WORK, WORK, CARRY, MOVE],

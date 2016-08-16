@@ -1,11 +1,12 @@
-var log = false;
-var calculateBuildCost = require('calculateBuildCost');
-module.exports = function creepFactory (spawn, roles, buildInstructions) {
+module.exports = (function () {
+
+    var log = false;
+    var calculateBuildCost = require('calculateBuildCost');
     var roleCounter = require('roleCounter');
     var roleCounts = roleCounter(roles);
     var building = false;
     var waiting = false;
-    
+
     function canBuild () {
         return !building && !waiting && (spawn.spawning === undefined || spawn.spawning === null);
     }
@@ -30,19 +31,22 @@ module.exports = function creepFactory (spawn, roles, buildInstructions) {
         building = true;
     }
     
-    buildInstructions.order.forEach( function(roleName, index) {
-        var role = _.first(roles, r => r.name === roleName);
-        var roleCount = _.first(roleCounts, rc => rc.role.name === roleName);
-        if (roleCount.count < 1) {
-            build(role, 'buildInstructions.order[' + index + ']');
-            return;
-        }
-        
-        roleCount.count--;
-    });
+    return (spawn, roles, buildInstructions) => {
 
-    if (buildInstructions.infinite !== undefined && buildInstructions.infinite !== null) {
-        var role = _.first(roles, r => r.name === buildInstructions.infinite);
-        build(role, 'buildInstruction.infinite');
-    }
-};
+        buildInstructions.order.forEach( function(roleName, index) {
+            var role = _.first(roles, r => r.name === roleName);
+            var roleCount = _.first(roleCounts, rc => rc.role.name === roleName);
+            if (roleCount.count < 1) {
+                build(role, 'buildInstructions.order[' + index + ']');
+                return;
+            }
+            
+            roleCount.count--;
+        });
+
+        if (buildInstructions.infinite !== undefined && buildInstructions.infinite !== null) {
+            var role = _.first(roles, r => r.name === buildInstructions.infinite);
+            build(role, 'buildInstruction.infinite');
+        }
+    };
+}());

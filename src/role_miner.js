@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = (function () {
     return {
         name: 'miner',
         body: [CARRY, WORK, WORK, WORK, MOVE],

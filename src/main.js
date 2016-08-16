@@ -1,4 +1,4 @@
-var roles = require('roles')();
+var roles = require('roles');
 var roleExecutor = require('roleExecutor');
 var spawnFactory = require('spawnFactory');
 var creepFactory = require('creepFactory');

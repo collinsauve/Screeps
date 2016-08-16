@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = (function () {
 
     var roleNames = [
         'harvester',
@@ -10,5 +10,5 @@ module.exports = () => {
         'archer'
     ];
 
-    return roleNames.map(function (rn) { return require('role_' + rn);});
-}
+    return () => roleNames.map(function (rn) { return require('role_' + rn);});
+}());
