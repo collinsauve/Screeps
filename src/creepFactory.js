@@ -2,8 +2,7 @@ module.exports = (function () {
 
     var log = false;
     var calculateBuildCost = require('calculateBuildCost');
-    var roleCounter = require('roleCounter');
-    var roleCounts = roleCounter(roles);
+    var roleCounter = require('roleCounter');    
     var building = false;
     var waiting = false;
 
@@ -33,6 +32,7 @@ module.exports = (function () {
     
     return (spawn, roles, buildInstructions) => {
 
+        var roleCounts = roleCounter(roles);
         buildInstructions.order.forEach( function(roleName, index) {
             var role = _.first(roles, r => r.name === roleName);
             var roleCount = _.first(roleCounts, rc => rc.role.name === roleName);
