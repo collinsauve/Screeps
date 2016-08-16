@@ -10,5 +10,5 @@ module.exports = (function () {
         'archer'
     ];
 
-    return roleNames.map(function (rn) { return require('role_' + rn);});
+    return roleNames.map(function (rn) { return require('role_' + rn); });
 }());
