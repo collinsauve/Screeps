@@ -2,7 +2,7 @@ var creepCommands = require('creepCommands');
 
 module.exports = {
     name: 'archer',
-    body: [Game.RANGED_ATTACK, Game.RANGED_ATTACK, Game.RANGED_ATTACK, Game.MOVE, Game.RANGED_ATTACK],
+    body: [RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE, RANGED_ATTACK],
     execution: function guard(creep) {
         creepCommands.attackNearestHostileCreep(creep) ||
         creepCommands.attackNearestHostileSpawn(creep) ||

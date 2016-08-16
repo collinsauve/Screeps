@@ -1,6 +1,6 @@
 module.exports = {
     name: 'harvester',
-    body: [Game.WORK, Game.CARRY, Game.MOVE],
+    body: [WORK, CARRY, MOVE],
     execution: function harvester(creep) {
         function hasEnergyFilter(source) {
             return source.energy > 0;

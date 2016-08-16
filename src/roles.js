@@ -1,7 +1,7 @@
 var roleNames = [
     'harvester',
     'builder',
-    //'guard',
+    'guard',
     'healer',
     'miner',
     'hauler',

@@ -1,6 +1,6 @@
 module.exports = {
     name: 'builder',
-    body: [Game.WORK, Game.WORK, Game.CARRY, Game.MOVE],
+    body: [WORK, WORK, CARRY, MOVE],
     execution: function builder(creep) {		
         if(creep.energy === 0) {
             creep.moveTo(Game.spawns.Spawn1);
