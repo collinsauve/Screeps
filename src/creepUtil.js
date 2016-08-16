@@ -1,4 +1,4 @@
-﻿module.exports = (function () {
+module.exports = (function () {
 
     var _ = require('linq');
 

@@ -1,4 +1,4 @@
-﻿module.exports = (function () {
+module.exports = (function () {
     return {
         distance: function absoluteDistance(pos1, pos2) {
             if (pos1.x === undefined && pos1.pos !== undefined) {
