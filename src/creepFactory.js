@@ -46,7 +46,7 @@ module.exports = (function () {
 
         if (buildInstructions.infinite !== undefined && buildInstructions.infinite !== null) {
             var role = _.first(roles, r => r.name === buildInstructions.infinite);
-            build(role, 'buildInstruction.infinite');
+            build(role, 'buildInstruction.infinite', spawn);
         }
     };
 }());
