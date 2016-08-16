@@ -1,10 +1,5 @@
 module.exports = (function () {
     
-    function count(creep, role) {
-        roleCounts.filter(rc => rc.role === role)
-                  .forEach(rc => rc.count++);
-    }
-    
     function logRoleCount(roleCount) {
         console.log(roleCount.role.name + ' = ' + roleCount.count);
     }
@@ -20,7 +15,10 @@ module.exports = (function () {
             };
         });
         
-        creepRole(roles, count); 
+        creepRole(roles, (creep, role) => {
+            roleCounts.filter(rc => rc.role === role)
+                      .forEach(rc => rc.count++);
+        }); 
         
         if (log) {
             roleCounts.forEach(logRoleCount);
