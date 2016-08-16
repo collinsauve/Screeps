@@ -29,6 +29,7 @@ module.exports = () => {
     }
 
     return {
+        map: (array, fn) => array === null || array === undefined ? [] : array.map(fn), 
         selectMany: function (array, fn) {
             var result1 = array.select(fn);
             var result2 = [];

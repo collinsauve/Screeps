@@ -10,6 +10,6 @@ module.exports = function calculateBuildCost(parts) {
         { part: TOUGH, cost: 5 }
     ];
     
-    var partCosts = parts.map(p => _.first(costs.filter(c => c.part === p)).cost);
+    var partCosts = _.map(parts, p => _.first(costs.filter(c => c.part === p)).cost);
     return _.sum(partCosts);
 }
