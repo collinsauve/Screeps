@@ -31,8 +31,8 @@ module.exports = function creepFactory (spawn, roles, buildInstructions) {
     }
     
     buildInstructions.order.forEach( function(roleName, index) {
-        var role = roles.first( function (r) { return r.name === roleName; } );
-        var roleCount = roleCounts.first( function (rc) { return rc.role.name === roleName; } );
+        var role = _.first(roles, r => r.name === roleName);
+        var roleCount = _.first(roleCounts, rc => rc.role.name === roleName);
         if (roleCount.count < 1) {
             build(role, 'buildInstructions.order[' + index + ']');
             return;
@@ -42,7 +42,7 @@ module.exports = function creepFactory (spawn, roles, buildInstructions) {
     });
 
     if (buildInstructions.infinite !== undefined && buildInstructions.infinite !== null) {
-        var role = roles.first(function(r) { return r.name === buildInstructions.infinite; });
+        var role = _.first(roles, r => r.name === buildInstructions.infinite);
         build(role, 'buildInstruction.infinite');
     }
 };
