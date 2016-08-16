@@ -6,12 +6,12 @@ module.exports = (function () {
     var building = false;
     var waiting = false;
 
-    function canBuild () {
+    function canBuild (spawn) {
         return !building && !waiting && (spawn.spawning === undefined || spawn.spawning === null);
     }
     
-    function build (role, reason) {
-        if (!canBuild()) {
+    function build (role, reason, spawn) {
+        if (!canBuild(spawn)) {
             return;
         }    
         var buildCost = calculateBuildCost(role.body)
@@ -37,7 +37,7 @@ module.exports = (function () {
             var role = _.first(roles, r => r.name === roleName);
             var roleCount = _.first(roleCounts, rc => rc.role.name === roleName);
             if (roleCount.count < 1) {
-                build(role, 'buildInstructions.order[' + index + ']');
+                build(role, 'buildInstructions.order[' + index + ']', spawn);
                 return;
             }
             
