@@ -1,6 +1,8 @@
-var creepRole = require('creepRole');
-var log = false;
 module.exports = function roleCounter(roles) {
+
+    var creepRole = require('creepRole');
+    var log = false;
+
     var roleCounts = roles.select( function (r) {
         return {
             role: r,

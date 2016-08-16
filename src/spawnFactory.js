@@ -1,5 +1,6 @@
-var log = false;
-module.exports = function spawnFactory(x, y) {		
+module.exports = function spawnFactory(x, y) {
+
+    var log = false;		
     var spawns = Object.keys(Game.spawns);
     var spawnName = spawns.firstOrDefault();
     if (spawnName === undefined || spawnName === null) {

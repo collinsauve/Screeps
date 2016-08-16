@@ -1,10 +1,14 @@
-var roleNames = [
-    'harvester',
-    'builder',
-    'guard',
-    'healer',
-    'miner',
-    'hauler',
-    'archer'
-];
-module.exports = roleNames.select( function (rn) { return require('role_' + rn); } );
+module.exports = () => {
+
+    var roleNames = [
+        'harvester',
+        'builder',
+        'guard',
+        'healer',
+        'miner',
+        'hauler',
+        'archer'
+    ];
+
+    return roleNames.select((rn) => require('role_' + rn)());
+}
