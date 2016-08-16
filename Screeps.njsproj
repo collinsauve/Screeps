@@ -16,10 +16,50 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="src\_referencs.js" />
+    <Content Include="ScreepsAutocomplete\Config\SublimeCodeIntel.json" />
+    <Content Include="ScreepsAutocomplete\Readme.md" />
+    <Compile Include="ScreepsAutocomplete\_references.js" />
     <Content Include="README.md" />
     <Compile Include="ai\findAttack.js" />
     <Compile Include="ai\healer.js" />
     <Compile Include="ai\main.js" />
+    <Compile Include="ScreepsAutocomplete\ConstructionSite.js" />
+    <Compile Include="ScreepsAutocomplete\Creep.js" />
+    <Compile Include="ScreepsAutocomplete\Flag.js" />
+    <Compile Include="ScreepsAutocomplete\Game.js" />
+    <Compile Include="ScreepsAutocomplete\Global\Constants.js" />
+    <Compile Include="ScreepsAutocomplete\Memory.js" />
+    <Compile Include="ScreepsAutocomplete\Mineral.js" />
+    <Compile Include="ScreepsAutocomplete\Nuke.js" />
+    <Compile Include="ScreepsAutocomplete\OwnedStructure.js" />
+    <Compile Include="ScreepsAutocomplete\PathFinder.js" />
+    <Compile Include="ScreepsAutocomplete\RawMemory.js" />
+    <Compile Include="ScreepsAutocomplete\Resource.js" />
+    <Compile Include="ScreepsAutocomplete\Room.js" />
+    <Compile Include="ScreepsAutocomplete\RoomObject.js" />
+    <Compile Include="ScreepsAutocomplete\RoomPosition.js" />
+    <Compile Include="ScreepsAutocomplete\Source.js" />
+    <Compile Include="ScreepsAutocomplete\Structure.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureContainer.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureController.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureExtension.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureExtractor.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureKeeperLair.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureLab.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureLink.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureNuker.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureObserver.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructurePortal.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructurePowerBank.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructurePowerSpawn.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureRampart.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureRoad.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureSpawn.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureStorage.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureTerminal.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureTower.js" />
+    <Compile Include="ScreepsAutocomplete\Structures\StructureWall.js" />
     <Compile Include="src\calculateBuildCost.js" />
     <Compile Include="src\creepCommands.js" />
     <Compile Include="src\creepFactory.js" />
@@ -42,6 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ai\" />
+    <Folder Include="ScreepsAutocomplete\" />
+    <Folder Include="ScreepsAutocomplete\Config\" />
+    <Folder Include="ScreepsAutocomplete\Global\" />
+    <Folder Include="ScreepsAutocomplete\Structures\" />
     <Folder Include="src\" />
     <Folder Include="typings\" />
     <Folder Include="typings\globals\" />
