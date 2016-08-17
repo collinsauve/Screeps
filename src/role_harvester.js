@@ -4,7 +4,7 @@ module.exports = (function () {
 
     return {
         name: 'harvester',
-        body: [WORK, CARRY, MOVE],
+        body: [WORK, WORK, CARRY, MOVE],
         execution: function harvester(creep) {
             function hasEnergyFilter(source) {
                 return source.energy > 0;

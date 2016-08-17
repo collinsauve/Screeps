@@ -1,7 +1,7 @@
 module.exports = (function () {
     return {
         name: 'hauler',
-        body: [CARRY, MOVE],
+        body: [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE],
         execution: function hauler(creep) {
             function minerFilter(t) {
                 return t.memory.role == 'miner';
