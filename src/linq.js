@@ -37,7 +37,7 @@ module.exports = (function () {
             return result2;
         },
         reduce: reduce,
-        sum: array => reduce(0, (accum, element, index) => accum + element),
+        sum: array => reduce(array, 0, (accum, element, index) => accum + element),
         firstOrDefault: firstOrDefault,
         first: function (array, fn) {
             var result = firstOrDefault(array, fn);
