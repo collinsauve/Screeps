@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    const log = logFactory('role_builder');
+    const log = loggerFactory('role_builder');
     return {
         name: 'builder',
         body: [WORK, CARRY, CARRY, MOVE, MOVE],

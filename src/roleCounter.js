@@ -1,6 +1,6 @@
 module.exports = (function () {
     
-    log = logFactory('roleCounter');
+    log = loggerFactory('roleCounter');
     function logRoleCount(roleCount) {
         console.log(roleCount.role.name + ' = ' + roleCount.count);
     }

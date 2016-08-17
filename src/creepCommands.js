@@ -1,7 +1,7 @@
 module.exports = (function () {
 
     const creepUtil = require('creepUtil');
-    const log = logFactory('creepCommands');
+    const log = loggerFactory('creepCommands');
     const protectionRadius = 5;
 
     function logAction(creep, action, target) {
