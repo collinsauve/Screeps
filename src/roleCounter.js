@@ -1,10 +1,11 @@
 module.exports = (function () {
     
+    log = logFactory('roleCounter');
     function logRoleCount(roleCount) {
         console.log(roleCount.role.name + ' = ' + roleCount.count);
     }
     
-    return (roles) => {
+    return () => {
         var creepRole = require('creepRole');
         var log = false;
 
@@ -15,7 +16,7 @@ module.exports = (function () {
             };
         });
         
-        creepRole(roles, (creep, role) => {
+        creepRole((creep, role) => {
             roleCounts.filter(rc => rc.role === role)
                       .forEach(rc => rc.count++);
         }); 

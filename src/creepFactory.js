@@ -27,9 +27,9 @@ module.exports = (function () {
         building = true;
     }
     
-    return (spawn, roles, buildInstructions) => {
+    return (spawn, buildInstructions) => {
 
-        var roleCounts = roleCounter(roles);
+        var roleCounts = roleCounter();
         buildInstructions.order.forEach((roleName, index) => {
             var role = linq.first(roles, r => r.name === roleName);
             var roleCount = linq.first(roleCounts, rc => rc.role.name === roleName);
