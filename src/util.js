@@ -5,7 +5,7 @@ module.exports = (function () {
         .substring(1);
     }
 
-    function calculateBuildCost() {
+    function calculateBuildCost(parts) {
         var partCosts = _.map(parts, p => BODYPART_COST[p]);
         return _.sum(partCosts);
     }
