@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    const log = require("logger")("creepFactory");
+    const log = logFactory("creepFactory");
     const roleCounter = require('roleCounter');    
     var building = false;
     var waiting = false;

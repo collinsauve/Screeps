@@ -1,7 +1,8 @@
 global.util = require('util');
 global.constants = require('constants');
-global.linq = require('linq');
+global.linq = require('core.linq');
 global.roles = require('roles');
+global.logFactory = require('core.logFactory');
 
 const roleExecutor = require('roleExecutor');
 const spawnFactory = require('spawnFactory');
