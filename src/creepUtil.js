@@ -1,7 +1,5 @@
 module.exports = (function () {
 
-    var linq = require('linq');
-
     function shouldChase(creep, hostile, protectionRadius) {
 
         // Determine if we are in firing range

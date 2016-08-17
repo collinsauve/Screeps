@@ -22,7 +22,7 @@ module.exports = (function () {
             waiting = true;
             return;
         }
-        const name = role.name + '-' + uuid();
+        const name = role.name + '-' + util.uuid();
         log.info('Creating creep \'' + name + '\' from ' + reason);
         spawn.createCreep(role.body, undefined, { role: role.name });
         building = true;

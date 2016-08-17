@@ -1,7 +1,6 @@
 module.exports = (function () {
 
     return (category, minimumLevel) => {
-        const constants = require('constants');
         const levels = constants.logLevels
         const levelAbbrev = ['E', 'W', 'I', 'D'];
         const defaultMinimumLevel = levels.info;

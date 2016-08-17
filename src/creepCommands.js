@@ -6,7 +6,7 @@ module.exports = (function () {
 
     function logAction(creep, action, target) {
         var suffix = target === undefined ? '' : ' ' + target.name;
-        log.info(creep.name + '(' + creep.memory.role + ') ' + action + suffix + '.'); 
+        log.debug(creep.name + action + suffix); 
     }
 
     function action(creep, target, actionMessage, actionFunction) {
@@ -80,7 +80,7 @@ module.exports = (function () {
     }
 
     function attackAnyHostileSpawn(creep) {
-        return attackAny(creep, FIND_HOSTILE_CREEPS, null, 'spawn');
+        return attackAny(creep, FIND_HOSTILE_SPAWNS, null, 'spawn');
     }
 
     function healNearestDamagedFriendly(creep) {
