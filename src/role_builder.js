@@ -9,7 +9,7 @@ module.exports = (function () {
             if (creep.carry[RESOURCE_ENERGY] === 0) {
                 log.debug('getting energy');
                 creep.moveTo(Game.spawns.Spawn1);
-                creep.withdraw(creep, RESOURCE_ENERGY);
+                creep.withdraw(Game.spawns.Spawn1, RESOURCE_ENERGY);
             } else {
 
                 
