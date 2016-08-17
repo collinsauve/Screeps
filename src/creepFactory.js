@@ -1,5 +1,6 @@
 module.exports = (function () {
 
+    var _ = require("linq");
     var log = require("logger")("creepFactory");
     var calculateBuildCost = require('calculateBuildCost');
     var roleCounter = require('roleCounter');    
