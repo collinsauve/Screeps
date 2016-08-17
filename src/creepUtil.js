@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    var _ = require('linq');
+    var linq = require('linq');
 
     function shouldChase(creep, hostile, protectionRadius) {
 
@@ -11,10 +11,10 @@ module.exports = (function () {
         }
         
         var typesToProtect = [Game.MY_CREEPS, Game.MY_SPAWNS, Game.MY_STRUCTURES];
-        var unitsToProtect = _.selectMany(typesToProtect, type => creep.room.find(type)
-            .where(unit => unit.id !== creep.id && unit.pos.inRangeTo(hostile.pos, protectionRadius)));
+        var unitsToProtect =  _.filter(linq.selectMany(typesToProtect, type => creep.room.find(type),
+            unit => unit.id !== creep.id && unit.pos.inRangeTo(hostile.pos, protectionRadius)));
         
-        var firstUnitToProtect = unitsToProtect.firstOrDefault();
+        var firstUnitToProtect = linq.firstOrDefault(unitsToProtect);
         return firstUnitToProtect !== undefined && firstUnitToProtect !== null;
     }
 
@@ -34,7 +34,7 @@ module.exports = (function () {
     }
 
     function firingRange(creep) {
-        return _.max(creep.body.map(partRange));
+        return linq.max(creep.body.map(partRange));
     }
 
     return {
