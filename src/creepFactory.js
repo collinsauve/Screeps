@@ -27,7 +27,7 @@ module.exports = (function () {
         building = true;
     }
     
-    return (spawn, buildInstructions) => {
+    return (spawn, roles, buildInstructions) => {
 
         var roleCounts = roleCounter(roles);
         buildInstructions.order.forEach((roleName, index) => {

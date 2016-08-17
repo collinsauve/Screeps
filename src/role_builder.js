@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    const log = require('logger')('role/builder');
+    const log = require('logger')('role_builder');
     return {
         name: 'builder',
         body: [WORK, CARRY, CARRY, MOVE, MOVE],
