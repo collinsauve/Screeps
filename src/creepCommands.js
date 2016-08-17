@@ -105,6 +105,8 @@ module.exports = (function () {
         return moveToNearest(creep, FIND_MY_CREEPS, { filter: roleFilter }, targetRole);
     }
 
+    
+
     return {
         attackNearestHostileCreep: attackNearestHostileCreep,
         attackNearestHostileSpawn: attackNearestHostileSpawn,
