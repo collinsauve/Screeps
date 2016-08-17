@@ -1,7 +1,6 @@
 module.exports = (function () {
 
     const log = require("logger")("creepFactory");
-    const calculateBuildCost = require('calculateBuildCost');
     const roleCounter = require('roleCounter');    
     var building = false;
     var waiting = false;
@@ -14,7 +13,7 @@ module.exports = (function () {
         if (!canBuild(spawn)) {
             return;
         }    
-        const buildCost = calculateBuildCost(role.body)
+        const buildCost = util.calculateBuildCost(role.body)
         log.debug('buildCost = ' + buildCost + '; spawn.energy = ' + spawn.energy + ';');
 
         if (buildCost > spawn.energy) {

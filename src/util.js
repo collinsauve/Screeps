@@ -5,7 +5,13 @@ module.exports = (function () {
         .substring(1);
     }
 
+    function calculateBuildCost() {
+        var partCosts = _.map(parts, p => BODYPART_COST[p]);
+        return _.sum(partCosts);
+    }
+
     return {
-        uuid: uuid
+        uuid: uuid,
+        calculateBuildCost: calculateBuildCost
     };
 }());
