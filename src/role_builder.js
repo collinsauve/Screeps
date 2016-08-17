@@ -10,8 +10,20 @@ module.exports = (function () {
                 log.debug('getting energy');
                 creep.moveTo(Game.spawns.Spawn1);
                 creep.withdraw(creep, RESOURCE_ENERGY);
-            }
-            else {
+            } else {
+
+                
+                var controller = creep.room.controller;
+                //TODO: Make this so it is dynamic based on controller level
+                //TODO: Find and assign a single builder to upgrade the controller.  
+                //      This will currently send all builders over to the controller to upgrade it.
+                if (controller.ticksToDowngrade < 10000) {
+                    log.debug('going reset controller');
+                    creep.moveTo(controller);
+                    creep.upgradeController(controller);
+                }  
+
+                // find a construction site
                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
                 if(targets.length) {
                     log.debug('going to build construction site');

@@ -2,6 +2,8 @@ module.exports = (function () {
 
     function shouldChase(creep, hostile, protectionRadius) {
 
+        //TODO: I don't think this works AT ALL.  Lots of things have changed in the API.
+
         // Determine if we are in firing range
         var maxRange = Math.max(firingRange(creep), firingRange(hostile));
         if (creep.pos.inRangeTo(hostile.pos, maxRange)) {
@@ -22,9 +24,9 @@ module.exports = (function () {
 
     function partRange(part) {
         switch (part.type) {
-            case Game.RANGED_ATTACK:
-                return 3;
-            case Game.ATTACK:
+            case RANGED_ATTACK:
+                return 3; //TODO: Is this correct?
+            case ATTACK:
                 return 1;
             default:
                 return 0;
