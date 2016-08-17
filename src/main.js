@@ -1,9 +1,8 @@
 global.util = require('util');
-global.linq = require('core.linq');
-global.loggerFactory = require('core.loggerFactory');
-global.constants = require('core.constants');
-global.roles = require('roles');
+global.constants = require('constants');
+global.linq = require('linq');
 
+const roles = require('roles');
 const roleExecutor = require('roleExecutor');
 const spawnFactory = require('spawnFactory');
 const creepFactory = require('creepFactory');
@@ -22,9 +21,9 @@ const buildInstructions = {
         'guard', 'healer', 'archer',
         'guard', 'healer', 'archer',
         'guard', 'guard'
-    ]
-    //infinite: 'archer'
+    ],
+    infinite: 'archer'
 };
 
-roleExecutor();
-creepFactory(spawn, buildInstructions);
+roleExecutor(roles);
+creepFactory(spawn, roles, buildInstructions);

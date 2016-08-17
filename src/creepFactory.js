@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    const log = loggerFactory("creepFactory");
+    const log = require("logger")("creepFactory");
     const roleCounter = require('roleCounter');    
     var building = false;
     var waiting = false;
@@ -27,9 +27,9 @@ module.exports = (function () {
         building = true;
     }
     
-    return (spawn, buildInstructions) => {
+    return (spawn, roles, buildInstructions) => {
 
-        var roleCounts = roleCounter();
+        var roleCounts = roleCounter(roles);
         buildInstructions.order.forEach((roleName, index) => {
             var role = linq.first(roles, r => r.name === roleName);
             var roleCount = linq.first(roleCounts, rc => rc.role.name === roleName);

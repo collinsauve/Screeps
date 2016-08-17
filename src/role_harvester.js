@@ -1,6 +1,6 @@
 module.exports = (function () {
     
-    const log = loggerFactory('role_harvester');
+    const log = require('logger')('role_harvester');
 
     return {
         name: 'harvester',
