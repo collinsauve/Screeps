@@ -24,7 +24,7 @@ module.exports = (function () {
         }
         const name = role.name + '-' + util.uuid();
         log.info('Creating creep \'' + name + '\' from ' + reason);
-        spawn.createCreep(role.body, undefined, { role: role.name });
+        spawn.createCreep(role.body, name, { role: role.name });
         building = true;
     }
     
