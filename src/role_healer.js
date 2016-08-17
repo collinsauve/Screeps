@@ -3,7 +3,7 @@ module.exports = (function () {
     var creepCommands = require('creepCommands');
     return {
         name: 'healer',
-        body: [TOUGH, MOVE, HEAL, MOVE],
+        body: [MOVE, HEAL],
         execution: function healer(creep) {
             creepCommands.healNearestDamagedFriendly(creep) ||
             creepCommands.followClosestFriendlyRole(creep, 'guard') ||
