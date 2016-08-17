@@ -1,5 +1,5 @@
 global.util = require('util');
-global.constants = require('constants');
+global.constants = require('core.constants');
 global.linq = require('core.linq');
 global.roles = require('roles');
 global.logFactory = require('core.logFactory');
