@@ -1,12 +1,8 @@
 module.exports = (function () {
 
     return (category, minimumLevel) => {
-        const levels = {
-            error: 0,
-            warning: 1,
-            info: 2,
-            debug: 3,
-        };
+        const constants = require('constants');
+        const levels = constants.logLevels
         const levelAbbrev = ['E', 'W', 'I', 'D'];
         const defaultMinimumLevel = levels.info;
         if (minimumLevel === undefined) minimumLevel = defaultMinimumLevel;
@@ -22,6 +18,7 @@ module.exports = (function () {
             warn: msg => log(levels.warning, msg),
             info: msg => log(levels.info, msg),
             debug: msg => log(levels.debug, msg),
+            levels: levels
         };
     };
 }());
