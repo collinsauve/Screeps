@@ -9,7 +9,7 @@ module.exports = (function () {
 
         function log(level, message) {
             if (level <= minimumLevel) {
-                console.log(levelAbbrev + ':' + category + ": " + message);
+                console.log(levelAbbrev[level] + ':' + category + ": " + message);
             }
         }
 
