@@ -21,8 +21,8 @@ const buildInstructions = {
         'guard', 'healer', 'archer',
         'guard', 'healer', 'archer',
         'guard', 'guard'
-    ],
-    infinite: 'archer'
+    ]
+    //infinite: 'archer'
 };
 
 roleExecutor();
