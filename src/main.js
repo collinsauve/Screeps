@@ -16,8 +16,8 @@ if (spawn === undefined || spawn === null) {
 const buildInstructions = {
     order: [
         'harvester', 'harvester', 'harvester', 
-        'guard', 'healer',
-        'guard', 'healer', 'archer',
+        'guard', 'healer', 'builder',
+        'guard', 'healer', 'archer', 'harvester', 'harvester', 'harvester',
         'guard', 'healer', 'archer',
         'guard', 'healer', 'archer',
         'guard', 'guard'

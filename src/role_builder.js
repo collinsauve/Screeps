@@ -18,7 +18,7 @@ module.exports = (function () {
                 //TODO: Find and assign a single builder to upgrade the controller.  
                 //      This will currently send all builders over to the controller to upgrade it.
                 if (controller.ticksToDowngrade < 10000) {
-                    log.debug('going reset controller');
+                    log.debug('going to reset controller');
                     creep.moveTo(controller);
                     creep.upgradeController(controller);
                 }  
@@ -32,6 +32,10 @@ module.exports = (function () {
                 } else {
                     log.debug('no construction site found');
                 }
+
+                log.debug('going upgrade controller');
+                creep.moveTo(controller);
+                creep.upgradeController(controller);
             }
         }
     };
