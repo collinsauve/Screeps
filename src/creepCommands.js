@@ -1,17 +1,12 @@
 module.exports = (function () {
 
-    var creepUtil = require('creepUtil');
-
-    var log = true;
-    var protectionRadius = 5;
+    const creepUtil = require('creepUtil');
+    const log = require('logger')('creepCommands');
+    const protectionRadius = 5;
 
     function logAction(creep, action, target) {
-        if (!log) {
-            return;
-        }
-
         var suffix = target === undefined ? '' : ' ' + target.name;
-        console.log(creep.name + '(' + creep.memory.role + ') ' + action + suffix + '.'); 
+        log.info(creep.name + '(' + creep.memory.role + ') ' + action + suffix + '.'); 
     }
 
     function action(creep, target, actionMessage, actionFunction) {
@@ -81,7 +76,7 @@ module.exports = (function () {
     }
 
     function attackNearestHostileSpawn(creep) {
-        return attackNearest(creep, FIND_HOSTILE_CREEPS, { ignoreCreeps: true }, 'spawn');
+        return attackNearest(creep, FIND_HOSTILE_SPAWNS, { ignoreCreeps: true }, 'spawn');
     }
 
     function attackAnyHostileSpawn(creep) {
