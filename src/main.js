@@ -1,15 +1,19 @@
-var roles = require('roles');
-var roleExecutor = require('roleExecutor');
-var spawnFactory = require('spawnFactory');
-var creepFactory = require('creepFactory');
+global.util = require('util');
+global.constants = require('constants');
+global.linq = require('linq');
 
-var spawn = spawnFactory();
+const roles = require('roles');
+const roleExecutor = require('roleExecutor');
+const spawnFactory = require('spawnFactory');
+const creepFactory = require('creepFactory');
+
+const spawn = spawnFactory();
 if (spawn === undefined || spawn === null) {
     console.log('Warning: No spawn found');
     return;
 }
 
-var buildInstructions = {
+const buildInstructions = {
     order: [
         'harvester', 'harvester', 'harvester', 
         'guard', 'healer',

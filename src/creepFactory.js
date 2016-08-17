@@ -1,9 +1,8 @@
 module.exports = (function () {
 
-    var _ = require("linq");
-    var log = require("logger")("creepFactory");
-    var calculateBuildCost = require('calculateBuildCost');
-    var roleCounter = require('roleCounter');    
+    const log = require("logger")("creepFactory");
+    const calculateBuildCost = require('calculateBuildCost');
+    const roleCounter = require('roleCounter');    
     var building = false;
     var waiting = false;
 
@@ -15,7 +14,7 @@ module.exports = (function () {
         if (!canBuild(spawn)) {
             return;
         }    
-        var buildCost = calculateBuildCost(role.body)
+        const buildCost = calculateBuildCost(role.body)
         log.debug('buildCost = ' + buildCost + '; spawn.energy = ' + spawn.energy + ';');
 
         if (buildCost > spawn.energy) {
@@ -23,7 +22,8 @@ module.exports = (function () {
             waiting = true;
             return;
         }
-        log.info('Creating creep from ' + reason + ' of \'' + role.name + '\'');
+        const name = role.name + '-' + uuid();
+        log.info('Creating creep \'' + name + '\' from ' + reason);
         spawn.createCreep(role.body, undefined, { role: role.name });
         building = true;
     }
@@ -32,8 +32,8 @@ module.exports = (function () {
 
         var roleCounts = roleCounter(roles);
         buildInstructions.order.forEach((roleName, index) => {
-            var role = _.first(roles, r => r.name === roleName);
-            var roleCount = _.first(roleCounts, rc => rc.role.name === roleName);
+            var role = linq.first(roles, r => r.name === roleName);
+            var roleCount = linq.first(roleCounts, rc => rc.role.name === roleName);
             if (roleCount.count < 1) {
                 tryBuild(role, 'buildInstructions.order[' + index + ']', spawn);
                 return;
@@ -43,7 +43,7 @@ module.exports = (function () {
         });
 
         if (buildInstructions.infinite !== undefined && buildInstructions.infinite !== null) {
-            var role = _.first(roles, r => r.name === buildInstructions.infinite);
+            var role = linq.first(roles, r => r.name === buildInstructions.infinite);
             tryBuild(role, 'buildInstruction.infinite', spawn);
         }
     };
