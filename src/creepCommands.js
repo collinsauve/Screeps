@@ -92,11 +92,11 @@ module.exports = (function () {
     }
 
     function returnToNearestFlag(creep) {
-        return moveToNearest(creep, Game.FLAGS, { ignoreCreeps: true }, 'flag');
+        return moveToNearest(creep, FIND_FLAGS, { ignoreCreeps: true }, 'flag');
     }
 
     function returnToNearestSpawn(creep) {
-        return moveToNearest(creep, Game.MY_SPAWNS, { ignoreCreeps: true }, 'spawn');
+        return moveToNearest(creep, FIND_MY_SPAWNS, { ignoreCreeps: true }, 'spawn');
 
     }
 
