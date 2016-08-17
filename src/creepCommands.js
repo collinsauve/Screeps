@@ -39,7 +39,7 @@ module.exports = (function () {
     }
 
     function actionNearest(creep, gameType, opts, actionMessage, actionFunction) {
-        var target = creep.pos.findNearest(gameType, opts);
+        var target = creep.pos.findClosestByPath(gameType, opts);
         if (target === undefined || target === null) {
             return false;
         }
@@ -77,20 +77,20 @@ module.exports = (function () {
     }
 
     function attackNearestHostileCreep(creep) {
-        return attackNearest(creep, Game.HOSTILE_CREEPS, { filter: creepUtil.shouldChaseFilter(creep, protectionRadius) }, 'creep');
+        return attackNearest(creep, FIND_HOSTILE_CREEPS, { filter: creepUtil.shouldChaseFilter(creep, protectionRadius) }, 'creep');
     }
 
     function attackNearestHostileSpawn(creep) {
-        return attackNearest(creep, Game.HOSTILE_CREEPS, { ignoreCreeps: true }, 'spawn');
+        return attackNearest(creep, FIND_HOSTILE_CREEPS, { ignoreCreeps: true }, 'spawn');
     }
 
     function attackAnyHostileSpawn(creep) {
-        return attackAny(creep, Game.HOSTILE_CREEPS, null, 'spawn');
+        return attackAny(creep, FIND_HOSTILE_CREEPS, null, 'spawn');
     }
 
     function healNearestDamagedFriendly(creep) {
         function damagedFriendlyFilter(t) { return t.hits < t.hitsMax && creep.name !== t.name; }
-        return actionNearest(creep, Game.MY_CREEPS, { filter: damagedFriendlyFilter }, 'healing', function(target) {
+        return actionNearest(creep, FIND_MY_CREEPS, { filter: damagedFriendlyFilter }, 'healing', function(target) {
             creep.moveTo(target);
             creep.heal(target);
         });
@@ -107,7 +107,7 @@ module.exports = (function () {
 
     function followClosestFriendlyRole(creep, targetRole) {
         function roleFilter(t) { return t.memory.role == targetRole; }
-        return moveToNearest(creep, Game.MY_CREEPS, { filter: roleFilter }, targetRole);
+        return moveToNearest(creep, FIND_MY_CREEPS, { filter: roleFilter }, targetRole);
     }
 
     return {
