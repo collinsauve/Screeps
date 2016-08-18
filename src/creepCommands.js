@@ -15,8 +15,10 @@ module.exports = (function () {
         }
         
         logAction(creep, actionMessage, target);
+        creep.memory.target = target;
+        creep.memory.actionMessage = actionMessage;
         actionFunction(target);
-        
+
         return true;   
     }
 
@@ -26,10 +28,7 @@ module.exports = (function () {
             return false;
         }
         
-        var target = targets[0];
-        logAction(creep, actionMessage, target);
-        actionFunction(target);
-        
+        action(creep, targets[0], actionMessage, actionFunction);
         return true;  
     }
 
@@ -38,10 +37,7 @@ module.exports = (function () {
         if (target === undefined || target === null) {
             return false;
         }
-        
-        logAction(creep, actionMessage, target);
-        actionFunction(target);
-        
+        action(creep, target, actionMessage, actionFunction);
         return true;   
     }
 
@@ -115,9 +111,10 @@ module.exports = (function () {
     function upgradeController(creep) {
 
         var controller = creep.room.controller;
-        logAction(creep, 'upgrading controller', controller);
-        creep.moveTo(controller);
-        creep.upgradeController(controller);
+        action(creep, controller, 'upgrading controller', () => {
+            creep.moveTo(controller);
+            creep.upgradeController(controller);
+        });
         return true;
     }
 
@@ -127,9 +124,10 @@ module.exports = (function () {
         //TODO: Find and assign a single builder to upgrade the controller.  
         //      This will currently send all builders over to the controller to upgrade it.
         if (controller.ticksToDowngrade < 10000) {
-            logAction(creep, 'reset controller', controller);
-            creep.moveTo(controller);
-            creep.upgradeController(controller);
+            action(creep, controller, 'reset controller', () => {
+                creep.moveTo(controller);
+                creep.upgradeController(controller);
+            });
             return true;
         }
         return false;
@@ -137,9 +135,10 @@ module.exports = (function () {
 
     function getEnergy(creep) {
         const target = Game.spawns.Spawn1;
-        logAction(creep, 'getting energy', target);
-        creep.moveTo(target);
-        creep.withdraw(target, RESOURCE_ENERGY);
+        action(creep, target, 'getting energy', () => {
+            creep.moveTo(target);
+            creep.withdraw(target, RESOURCE_ENERGY);
+        });
     }
 
     function getEnergyIfNeeded(creep) {
@@ -156,9 +155,10 @@ module.exports = (function () {
         
         var target = creep.pos.findClosestByPath(FIND_SOURCES, { filter: creepUtil.sourceHasEnergy });
         if (target !== undefined && target !== null) {
-            logAction(creep, 'harvesting', target)
-            creep.moveTo(target);
-            creep.harvest(target);
+            action(creep, target, 'harvesting', () => {
+                creep.moveTo(target);
+                creep.harvest(target);
+            });
             return true;
         } 
         log.info(() => "could not find source with remaining energy");
@@ -169,9 +169,10 @@ module.exports = (function () {
         
         const storeIn = findSomewhereToStoreEnergy(creep);
         if (storeIn !== undefined && storeIn !== null) {
-            logAction(creep, 'storing energy', storeIn);
-            creep.moveTo(storeIn);
-            creep.transfer(storeIn, RESOURCE_ENERGY);
+            action(creep, storeIn, 'storing energy', () => {
+                creep.moveTo(storeIn);
+                creep.transfer(storeIn, RESOURCE_ENERGY);
+            });
             return true;
         }
         return false;
