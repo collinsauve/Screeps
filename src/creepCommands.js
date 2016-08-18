@@ -139,7 +139,7 @@ module.exports = (function () {
         const target = Game.spawns.Spawn1;
         logAction(creep, 'getting energy', target);
         creep.moveTo(target);
-        creep.withdraw(target);
+        creep.withdraw(target, RESOURCE_ENERGY);
     }
 
     function getEnergyIfNeeded(creep) {
