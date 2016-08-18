@@ -5,8 +5,8 @@ module.exports = (function () {
     const protectionRadius = 5;
 
     function logAction(creep, action, target) {
-        var suffix = target === undefined ? '' : ' ' + target.name;
-        log.debug(() => creep.name + action + suffix); 
+        var suffix = target === undefined ? '' : ' target=' + target.name;
+        log.debug(() => creep.name + " " + action + suffix); 
     }
 
     function action(creep, target, actionMessage, actionFunction) {
