@@ -168,7 +168,7 @@ module.exports = (function () {
     function storeEnergyIfAny(creep) {
         
         const storeIn = findSomewhereToStoreEnergy(creep);
-        if (storeIn !== null) {
+        if (storeIn !== undefined && storeIn !== null) {
             logAction(creep, 'storing energy', storeIn);
             creep.moveTo(storeIn);
             creep.transfer(storeIn);
