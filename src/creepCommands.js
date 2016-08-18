@@ -171,7 +171,7 @@ module.exports = (function () {
         if (storeIn !== undefined && storeIn !== null) {
             logAction(creep, 'storing energy', storeIn);
             creep.moveTo(storeIn);
-            creep.transfer(storeIn);
+            creep.transfer(storeIn, RESOURCE_ENERGY);
             return true;
         }
         return false;
