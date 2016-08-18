@@ -178,11 +178,11 @@ module.exports = (function () {
     }
 
     function findSomewhereToStoreEnergy(creep) {
-        const closestSpawn = creep.pos.findClosestByPath(FIND_SOURCES, { filter: spawn => !creepUtil.structureStorageIsFull(spawn) });
+        const closestSpawn = creep.pos.findClosestByPath(FIND_MY_SPAWNS, { filter: spawn => !creepUtil.structureStorageIsFull(spawn) });
         if (closestSpawn !== null) {
             return closestSpawn;            
         }
-        const closetStructue = creep.pos.findClosestByPath(FIND_SOURCES, { filter: struct => !creepUtil.structureStorageIsFull(struct)  });
+        const closetStructue = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: struct => !creepUtil.structureStorageIsFull(struct)  });
         return closetStructue;
     }
 
