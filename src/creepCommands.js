@@ -115,7 +115,7 @@ module.exports = (function () {
     function upgradeController(creep) {
 
         var controller = creep.room.controller;
-        log.debug(() => 'upgrading controller');
+        logAction(creep, 'upgrading controller', controller);
         creep.moveTo(controller);
         creep.upgradeController(controller);
         return true;
@@ -127,7 +127,7 @@ module.exports = (function () {
         //TODO: Find and assign a single builder to upgrade the controller.  
         //      This will currently send all builders over to the controller to upgrade it.
         if (controller.ticksToDowngrade < 10000) {
-            log.debug(() => 'going to reset controller');
+            logAction(creep, 'reset controller', controller);
             creep.moveTo(controller);
             creep.upgradeController(controller);
             return true;
@@ -136,9 +136,10 @@ module.exports = (function () {
     }
 
     function getEnergy(creep) {
-        log.debug(() => 'getting energy');
-        creep.moveTo(Game.spawns.Spawn1);
-        creep.withdraw(Game.spawns.Spawn1, RESOURCE_ENERGY);
+        const target = Game.spawns.Spawn1;
+        logAction(creep, 'getting energy', target);
+        creep.moveTo(target);
+        creep.withdraw(target);
     }
 
     function getEnergyIfNeeded(creep) {
@@ -152,10 +153,10 @@ module.exports = (function () {
     function harvestEnergyIfNotFull(creep) {
         
         if(creepUtil.fullCarry(creep)) return false;
-
-        log.debug(() => 'harvesting')
+        
         var target = creep.pos.findClosestByPath(FIND_SOURCES, { filter: creepUtil.sourceHasEnergy });
         if (target !== undefined && target !== null) {
+            logAction(creep, 'harvesting', target)
             creep.moveTo(target);
             creep.harvest(target);
             return true;
@@ -168,7 +169,7 @@ module.exports = (function () {
         
         const storeIn = findSomewhereToStoreEnergy(creep);
         if (storeIn !== null) {
-            log.debug(() => 'transfering energy to' + storeIn.name);
+            logAction(creep, 'storing energy', storeIn);
             creep.moveTo(storeIn);
             creep.transfer(storeIn);
             return true;
