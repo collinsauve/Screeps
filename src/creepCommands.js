@@ -123,7 +123,7 @@ module.exports = (function () {
         //TODO: Make this so it is dynamic based on controller level
         //TODO: Find and assign a single builder to upgrade the controller.  
         //      This will currently send all builders over to the controller to upgrade it.
-        if (controller.ticksToDowngrade < 2500) {
+        if (controller.ticksToDowngrade < 4000) {
             action(creep, controller, 'reset controller', () => {
                 creep.moveTo(controller);
                 creep.upgradeController(controller);
