@@ -38,7 +38,7 @@ module.exports = (function () {
     }
 
     function hasEnergy(creep) {
-        return creep.carry[RESOURCE_ENERGY] === 0
+        return creep.carry[RESOURCE_ENERGY] !== 0
     }
 
     function fullCarry(creep) {
