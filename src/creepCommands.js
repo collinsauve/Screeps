@@ -105,7 +105,47 @@ module.exports = (function () {
         return moveToNearest(creep, FIND_MY_CREEPS, { filter: roleFilter }, targetRole);
     }
 
+    function buildClosestConstructionSite(creep) {
+        return actionNearest(creep, FIND_CONSTRUCTION_SITES, null, 'building', function(target) {
+            creep.moveTo(targets);
+            creep.build(targets);
+        });
+    }
 
+    function upgradeController(creep) {
+
+        var controller = creep.room.controller;
+        log.debug(() => 'upgrading controller');
+        creep.moveTo(controller);
+        creep.upgradeController(controller);
+        return true;
+    }
+
+    function resetControllerDowngrade(creep) {
+        var controller = creep.room.controller;
+        //TODO: Make this so it is dynamic based on controller level
+        //TODO: Find and assign a single builder to upgrade the controller.  
+        //      This will currently send all builders over to the controller to upgrade it.
+        if (controller.ticksToDowngrade < 10000) {
+            log.debug(() => 'going to reset controller');
+            creep.moveTo(controller);
+            creep.upgradeController(controller);
+        }
+    }
+
+    function getEnergy(creep) {
+        log.debug(() => 'getting energy');
+        creep.moveTo(Game.spawns.Spawn1);
+        creep.withdraw(Game.spawns.Spawn1, RESOURCE_ENERGY);
+    }
+
+    function getEnergyIfNeeded(creep) {
+        if (!creepUtil.hasEnergy(creep)) {
+            getEnergy(creep);
+            return true;
+        }
+        return false;
+    }
 
     return {
         attackNearestHostileCreep: attackNearestHostileCreep,
@@ -114,6 +154,9 @@ module.exports = (function () {
         healNearestDamagedFriendly: healNearestDamagedFriendly,
         returnToNearestFlag: returnToNearestFlag,
         returnToNearestSpawn: returnToNearestSpawn,
-        followClosestFriendlyRole: followClosestFriendlyRole
+        followClosestFriendlyRole: followClosestFriendlyRole,
+        upgradeController: resetControllerDowngrade,
+        getEnergy: getEnergy,
+        getEnergyIfNeeded: getEnergyIfNeeded
     };
 }());

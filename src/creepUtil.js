@@ -37,6 +37,10 @@ module.exports = (function () {
         return linq.max(creep.body.map(partRange));
     }
 
+    function hasEnergy(creep) {
+        return creep.carry[RESOURCE_ENERGY] === 0
+    }
+
     return {
         // Determines if this creep should chase a hostile creep.
         // Attempts to protect all friendlies within a given radius.
@@ -48,6 +52,8 @@ module.exports = (function () {
         shouldChaseFilter: shouldChaseFilter,
         
         // Determines the firing range of a creep
-        firingRange: firingRange
+        firingRange: firingRange,
+
+        hasEnergy: hasEnergy
     };
 })();
