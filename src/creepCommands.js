@@ -130,7 +130,9 @@ module.exports = (function () {
             log.debug(() => 'going to reset controller');
             creep.moveTo(controller);
             creep.upgradeController(controller);
+            return true;
         }
+        return false;
     }
 
     function getEnergy(creep) {
