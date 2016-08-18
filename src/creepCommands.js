@@ -147,6 +147,42 @@ module.exports = (function () {
         return false;
     }
 
+    function harvestEnergyIfNotFull(creep) {
+        
+        if(creepUtil.fullCarry(creep)) return false;
+
+        log.debug(() => 'harvesting')
+        var target = creep.pos.findClosestByPath(FIND_SOURCES, { filter: creepUtil.sourceHasEnergy });
+        if (target !== undefined && target !== null) {
+            creep.moveTo(target);
+            creep.harvest(target);
+            return true;
+        } 
+        log.info(() => "could not find source with remaining energy");
+        return false;
+    }
+
+    function storeEnergyIfAny(creep) {
+        
+        const storeIn = findSomewhereToStoreEnergy(creep);
+        if (storeIn !== null) {
+            log.debug(() => 'transfering energy to' + storeIn.name);
+            creep.moveTo(storeIn);
+            creep.transfer(storeIn);
+            return true;
+        }
+        return false;
+    }
+
+    function findSomewhereToStoreEnergy(creep) {
+        const closestSpawn = creep.pos.findClosestByPath(FIND_SOURCES, { filter: spawn => !creepUtil.structureStorageIsFull(spawn) });
+        if (closestSpawn !== null) {
+            return closestSpawn;            
+        }
+        const closetStructue = creep.pos.findClosestByPath(FIND_SOURCES, { filter: struct => !creepUtil.structureStorageIsFull(struct)  });
+        return closetStructue;
+    }
+
     return {
         attackNearestHostileCreep: attackNearestHostileCreep,
         attackNearestHostileSpawn: attackNearestHostileSpawn,
@@ -157,6 +193,8 @@ module.exports = (function () {
         followClosestFriendlyRole: followClosestFriendlyRole,
         upgradeController: resetControllerDowngrade,
         getEnergy: getEnergy,
-        getEnergyIfNeeded: getEnergyIfNeeded
+        getEnergyIfNeeded: getEnergyIfNeeded,
+        harvestEnergyIfNotFull: harvestEnergyIfNotFull,
+        storeEnergyIfAny: storeEnergyIfAny
     };
 }());
