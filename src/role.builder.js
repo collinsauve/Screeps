@@ -7,7 +7,7 @@ module.exports = (function () {
         execution: function builder(creep) {		
             creepCommands.getEnergyIfNeeded(creep) ||
             creepCommands.resetControllerDowngrade(creep) ||                
-            creepCommands.buildClosestConstructionSite(creep)
+            creepCommands.buildClosestConstructionSite(creep) ||
             creepCommands.upgradeController(creep);
         }
     };
