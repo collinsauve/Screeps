@@ -4,13 +4,14 @@ global.loggerFactory = require('core.loggerFactory');
 global.constants = require('core.constants');
 global.roles = require('roles');
 
+const log = global.loggerFactory('main');
 const roleExecutor = require('roleExecutor');
 const spawnFactory = require('spawnFactory');
 const creepFactory = require('creepFactory');
 
 const spawn = spawnFactory();
 if (spawn === undefined || spawn === null) {
-    console.log('Warning: No spawn found');
+    log.warn(() => 'Warning: No spawn found');
     return;
 }
 

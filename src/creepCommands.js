@@ -6,7 +6,7 @@ module.exports = (function () {
 
     function logAction(creep, action, target) {
         var suffix = target === undefined ? '' : ' ' + target.name;
-        log.debug(creep.name + action + suffix); 
+        log.debug(() => creep.name + action + suffix); 
     }
 
     function action(creep, target, actionMessage, actionFunction) {

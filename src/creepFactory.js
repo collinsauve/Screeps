@@ -14,15 +14,15 @@ module.exports = (function () {
             return;
         }    
         const buildCost = util.calculateBuildCost(role.body)
-        log.debug('buildCost = ' + buildCost + '; spawn.energy = ' + spawn.energy + ';');
+        log.debug(() => 'buildCost = ' + buildCost + '; spawn.energy = ' + spawn.energy + ';');
 
         if (buildCost > spawn.energy) {
-            log.debug('Not enough energy to build creep from ' + reason + ' of \'' + role.name + '\'.  ');            
+            log.debug(() => 'Not enough energy to build creep from ' + reason + ' of \'' + role.name + '\'.  ');            
             waiting = true;
             return;
         }
         const name = role.name + '-' + util.uuid();
-        log.info('Creating creep \'' + name + '\' from ' + reason);
+        log.info(() => 'Creating creep \'' + name + '\' from ' + reason);
         spawn.createCreep(role.body, name, { role: role.name });
         building = true;
     }
