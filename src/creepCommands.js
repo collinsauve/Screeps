@@ -107,8 +107,8 @@ module.exports = (function () {
 
     function buildClosestConstructionSite(creep) {
         return actionNearest(creep, FIND_CONSTRUCTION_SITES, null, 'building', function(target) {
-            creep.moveTo(targets);
-            creep.build(targets);
+            creep.moveTo(target);
+            creep.build(target);
         });
     }
 
@@ -191,7 +191,9 @@ module.exports = (function () {
         returnToNearestFlag: returnToNearestFlag,
         returnToNearestSpawn: returnToNearestSpawn,
         followClosestFriendlyRole: followClosestFriendlyRole,
-        upgradeController: resetControllerDowngrade,
+        buildClosestConstructionSite: buildClosestConstructionSite,
+        upgradeController: upgradeController,
+        resetControllerDowngrade: resetControllerDowngrade,
         getEnergy: getEnergy,
         getEnergyIfNeeded: getEnergyIfNeeded,
         harvestEnergyIfNotFull: harvestEnergyIfNotFull,

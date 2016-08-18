@@ -42,7 +42,7 @@ module.exports = (function () {
     }
 
     function fullCarry(creep) {
-        return _.sum(creep.carry[]) >= creep.carryCapacity;
+        return _.sum(creep.carry) >= creep.carryCapacity;
     }
 
     function sourceHasEnergy(source) {
@@ -55,7 +55,7 @@ module.exports = (function () {
         }
         return _.sum(structure.store) < structure.storeCapacity;
     }
-    
+
     return {
         // Determines if this creep should chase a hostile creep.
         // Attempts to protect all friendlies within a given radius.
