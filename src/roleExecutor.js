@@ -1,8 +1,8 @@
 module.exports = (function () {
 
-    return (roles) => {
+    return () => {
         var creepRole = require('creepRole');
-        creepRole(roles, function(creep, role) {
+        creepRole(function(creep, role) {
             role.execution(creep);        
         });
     };

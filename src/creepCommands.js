@@ -1,7 +1,7 @@
 module.exports = (function () {
 
     const creepUtil = require('creepUtil');
-    const log = require('logger')('creepCommands');
+    const log = loggerFactory('creepCommands');
     const protectionRadius = 5;
 
     function logAction(creep, action, target) {
@@ -104,6 +104,8 @@ module.exports = (function () {
         function roleFilter(t) { return t.memory.role == targetRole; }
         return moveToNearest(creep, FIND_MY_CREEPS, { filter: roleFilter }, targetRole);
     }
+
+
 
     return {
         attackNearestHostileCreep: attackNearestHostileCreep,

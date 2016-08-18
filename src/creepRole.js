@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    return (roles, executionFn) => {
+    return (executionFn) => {
         for(var creepName in Game.creeps) {
             var creep = Game.creeps[creepName];
             var roleName = creep.memory.role;
