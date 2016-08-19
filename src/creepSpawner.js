@@ -29,10 +29,11 @@ module.exports = (function () {
     
     return (spawn, buildInstructions) => {
 
-        var roleCounts = roleCounter();        
+        const roleCounts = roleCounter();        
         buildInstructions.order.forEach((roleName, index) => {
-            var role = linq.first(roles, r => r.name === roleName);
+            const role = roles[roleName];
             var roleCount = roleCounts[roleName];
+            if (roleCount === undefined) roleCount = 0;
             if (roleCount.count < 1) {
                 tryBuild(role, 'buildInstructions.order[' + index + ']', spawn);
                 return;
@@ -42,7 +43,7 @@ module.exports = (function () {
         });
 
         if (buildInstructions.infinite !== undefined && buildInstructions.infinite !== null) {
-            var role = linq.first(roles, r => r.name === buildInstructions.infinite);
+            const role = roles[buildInstructions.infinite];
             tryBuild(role, 'buildInstruction.infinite', spawn);
         }
     };
