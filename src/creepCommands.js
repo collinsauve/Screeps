@@ -105,7 +105,7 @@ module.exports = (function () {
     }
 
     function returnToNearestFlag(actor) {
-        return moveToNearest(creep, FIND_FLAGS, { ignoreCreeps: true }, 'flag');
+        return moveToNearest(actor, FIND_FLAGS, { ignoreCreeps: true }, 'flag');
     }
 
     function returnToNearestSpawn(actor) {
@@ -150,7 +150,7 @@ module.exports = (function () {
             action(actor, controller, 'reset controller', () => {
                 //TODO: Structures can't move
                 actor.moveTo(controller);
-                creep.upgradeController(controller);
+                actor.upgradeController(controller);
             });
             return true;
         }
@@ -161,8 +161,8 @@ module.exports = (function () {
 
         return actionNearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy }, 'getting energy', target => {
             //TODO: Structures can't move
-            creep.moveTo(target);
-            creep.withdraw(target, RESOURCE_ENERGY);
+            actor.moveTo(target);
+            actor.withdraw(target, RESOURCE_ENERGY);
         });
     }
 
@@ -179,33 +179,34 @@ module.exports = (function () {
         if (creepUtil.fullCarry(actor)) return false;
         
         const success = actionNearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.sourceHasEnergy }, 'harvesting', target => {
-            creep.moveTo(target);
-            creep.harvest(target);
+            actor.moveTo(target);
+            actor.harvest(target);
         });
 
         if (success === false) log.info(() => "could not find source with remaining energy");
         return success;
     }
 
-    function storeEnergyIfAny(creep) {
+    function storeEnergyIfAny(actor) {
         
-        const storeIn = findSomewhereToStoreEnergy(creep);
+        const storeIn = findSomewhereToStoreEnergy(actor);
         if (storeIn !== undefined && storeIn !== null) {
-            action(creep, storeIn, 'storing energy', () => {
-                creep.moveTo(storeIn);
-                creep.transfer(storeIn, RESOURCE_ENERGY);
+            action(actor, storeIn, 'storing energy', () => {
+                //TODO: Structures can't move
+                actor.moveTo(storeIn);
+                actor.transfer(storeIn, RESOURCE_ENERGY);
             });
             return true;
         }
         return false;
     }
 
-    function findSomewhereToStoreEnergy(creep) {
-        const closestSpawn = creep.pos.findClosestByPath(FIND_MY_SPAWNS, { filter: spawn => !creepUtil.structureStorageIsFull(spawn) });
+    function findSomewhereToStoreEnergy(actor) {
+        const closestSpawn = actor.pos.findClosestByPath(FIND_MY_SPAWNS, { filter: spawn => !creepUtil.structureStorageIsFull(spawn) });
         if (closestSpawn !== null) {
             return closestSpawn;            
         }
-        const closetStructue = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: struct => !creepUtil.structureStorageIsFull(struct)  });
+        const closetStructue = actor.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: struct => !creepUtil.structureStorageIsFull(struct)  });
         return closetStructue;
     }
 
