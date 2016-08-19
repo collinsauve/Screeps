@@ -5,7 +5,7 @@ module.exports = (function () {
         name: 'builder',
         body: [WORK, CARRY, CARRY, MOVE, MOVE],
         execution: function builder(creep) {		
-            creepCommands.getEnergyIfNeeded(creep) ||
+            creepCommands.getEnergyIfNeededAndAvailableEnergyGreaterThan(creep, 300) ||
             creepCommands.resetControllerDowngrade(creep) ||                
             creepCommands.buildClosestConstructionSite(creep) ||
             creepCommands.upgradeController(creep);

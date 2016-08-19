@@ -174,6 +174,14 @@ module.exports = (function () {
         return false;
     }
 
+    function getEnergyIfNeededAndAvailableEnergyGreaterThan(actor, minimumAvailableEnergy) {
+        
+        if (actor.room.energyAvailable >= minimumAvailableEnergy) {
+            return getEnergyIfNeeded(actor);
+        }
+        return true; //TODO: Is this correct?
+    }
+
     function harvestEnergyIfNotFull(actor) {
         
         if (creepUtil.fullCarry(actor)) return false;
@@ -253,6 +261,7 @@ module.exports = (function () {
         storeEnergyIfAny: storeEnergyIfAny,
         repairAnyStructureInRoom: repairAnyStructureInRoom,
         healAnyDamagedFriendlyInRoom: healAnyDamagedFriendlyInRoom,
-        repairAnyRoadInRoom: repairAnyRoadInRoom
+        repairAnyRoadInRoom: repairAnyRoadInRoom,
+        getEnergyIfNeededAndAvailableEnergyGreaterThan: getEnergyIfNeededAndAvailableEnergyGreaterThan
     };
 }());
