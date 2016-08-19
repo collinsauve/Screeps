@@ -13,10 +13,9 @@ module.exports = (function () {
         if (!canBuild(spawn)) {
             return;
         }    
-        const buildCost = util.calculateBuildCost(role.body)
-        log.debug(() => 'buildCost = ' + buildCost + '; spawn.energy = ' + spawn.energy + ';');
 
-        if (buildCost > spawn.energy) {
+        const canCreate = spawn.canCreateCreep(role.body);
+        if (canCreate === ERR_NOT_ENOUGH_ENERGY) {
             log.debug(() => 'Not enough energy to build creep from ' + reason + ' of \'' + role.name + '\'.  ');            
             waiting = true;
             return;
@@ -31,10 +30,13 @@ module.exports = (function () {
 
         const roleCounts = roleCounter();        
         buildInstructions.order.forEach((roleName, index) => {
+
+            if (waiting) return;
+
             const role = roles[roleName];
             var roleCount = roleCounts[roleName];
             if (roleCount === undefined) roleCount = 0;
-            if (roleCount.count < 1) {
+            if (roleCount < 1) {
                 tryBuild(role, 'buildInstructions.order[' + index + ']', spawn);
                 return;
             }
