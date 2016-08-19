@@ -189,20 +189,26 @@ module.exports = (function () {
         return closetStructue;
     }
 
-    function repairAnyStructureInRoom(tower) {
-        return actionAny(tower, FIND_MY_STRUCTURES, { filter: s => s.hits < s.hitsMax }, 'repairing', function(target) {
+    function repairAnyStructureInRoom(actor) {
+        //TODO: Can towers and builders repair themselves?
+        return actionAny(actor, FIND_MY_STRUCTURES, { filter: s => s.hits < s.hitsMax }, 'repairing', function(target) {
+            //TODO: If was a creep instead of a tower, would have to move
             actor.repair(target);            
         });
     }
 
-    function repairAnyRoadInRoom(tower) {
-        return actionAny(tower, FIND_STRUCTURES, { filter: s => s.structureType == STRUCTURE_ROAD && s.hits < s.hitsMax }, 'repairing', function(target) {
+    function repairAnyRoadInRoom(actor) {
+        //TODO: Can towers and builders repair themselves?
+        return actionAny(actor, FIND_STRUCTURES, { filter: s => s.structureType == STRUCTURE_ROAD && s.hits < s.hitsMax }, 'repairing', function(target) {
+            //TODO: If was a creep instead of a tower, would have to move
             actor.repair(target);            
         });
     }
 
-    function healAnyDamagedFriendlyInRoom(tower) {
-        return actionAny(tower, FIND_MY_CREEPS, { filter: target => target.hits < target.hitsMax }, 'healing', function(target) {
+    function healAnyDamagedFriendlyInRoom(actor) {
+        //TODO: If was a creep, would not be able to heal itself.  Add this check to the filter.
+        return actionAny(actor, FIND_MY_CREEPS, { filter: target => target.hits < target.hitsMax }, 'healing', function(target) {
+            //TODO: If was a creep instead of a tower, would have to move
             actor.heal(target);            
         });
     }
