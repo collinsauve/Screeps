@@ -4,19 +4,21 @@ module.exports = (function () {
     const log = loggerFactory('creepCommands');
     const protectionRadius = 5;
 
-    function logAction(creep, action, target) {
+    function logAction(actor, action, target) {
         var suffix = target === undefined ? '' : ' target=' + target.name;
-        log.debug(() => creep.name + " " + action + suffix); 
+        log.debug(() => actor.name + " " + action + suffix); 
     }
 
-    function action(creep, target, actionMessage, actionFunction) {
+    function action(actor, target, actionMessage, actionFunction) {
         if (target === undefined || target === null) {
             return false;
         }
         
-        logAction(creep, actionMessage, target);
-        creep.memory.target = target;
-        creep.memory.actionMessage = actionMessage;
+        logAction(actor, actionMessage, target);
+        if (actor.memory !== undefined) {
+            actor.memory.target = target;
+            actor.memory.actionMessage = actionMessage;
+        }
         actionFunction(target);
 
         return true;   
