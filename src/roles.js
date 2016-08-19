@@ -10,5 +10,6 @@ module.exports = (function () {
         'archer'
     ];
 
-    return roleNames.map(function (rn) { return require('role.' + rn); });
+    const roles = _.map(roleNames, rn => require('role.' + rn));
+    return _.keyBy(roles, 'name');
 }());

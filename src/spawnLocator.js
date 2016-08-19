@@ -1,7 +1,6 @@
 module.exports = (function () { 
 
-    var log = false;
-
+    const log = loggerFactory('spawnLocator');
     return (x, y) => {	
         var spawns = Object.keys(Game.spawns);
         var spawnName = linq.firstOrDefault(spawns);
@@ -9,9 +8,7 @@ module.exports = (function () {
             //TODO: Create spawn at x, y
             return null;
         }
-        if (log) {
-            console.log('Found spawn: \'' + spawnName + '\'');
-        }
+        log.debug(() => 'Found spawn: \'' + spawnName + '\'');
         return Game.spawns[spawnName];
     };
 }());

@@ -6,11 +6,11 @@ global.roles = require('roles');
 global.creepCommands = require('creepCommands');
 
 const log = global.loggerFactory('main');
-const roleExecutor = require('roleExecutor');
-const spawnFactory = require('spawnFactory');
-const creepFactory = require('creepFactory');
+const roleExecutor = require('creepExecutor');
+const creepSpawner = require('creepSpawner');
+const spawnLocator = require('spawnLocator');
 
-const spawn = spawnFactory();
+const spawn = spawnLocator();
 if (spawn === undefined || spawn === null) {
     log.warn(() => 'Warning: No spawn found');
     return;
@@ -19,10 +19,10 @@ if (spawn === undefined || spawn === null) {
 const buildInstructions = {
     order: [
         'harvester', 'harvester', 'harvester', 'harvester', 
-        'builder', 'builder', 'builder', 'builder', 'builder', 'builder', 'builder', 'builder', 'builder', 'builder', 'builder', 'builder'
+        'builder', 'builder', 'builder', 'builder', 'builder'
     ]
     //infinite: 'archer'
 };
 
-roleExecutor();
-creepFactory(spawn, buildInstructions);
+creepExecutor();
+creepSpawner(spawn, buildInstructions);
