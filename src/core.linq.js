@@ -28,7 +28,14 @@ module.exports = (function () {
         return array[0];
     }
 
+    function keyBy(array, keyName) {
+        var result = {};
+        array.forEach(item => result[item[keyName]] = item);
+        return result;
+    }
+
     return {
+        keyBy: keyBy,
         map: (array, fn) => array === null || array === undefined ? [] : array.map(fn), 
         selectMany: function (array, fn) {
             var result1 = _.map(array, fn);

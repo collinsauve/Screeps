@@ -1,5 +1,6 @@
 module.exports = (function () {
 
+    const linq = require('core.linq');
     var roleNames = [
         'harvester',
         'builder',
@@ -11,5 +12,5 @@ module.exports = (function () {
     ];
 
     const roles = _.map(roleNames, rn => require('role.' + rn));
-    return _.keyBy(roles, 'name');
+    return linq.keyBy(roles, 'name');
 }());

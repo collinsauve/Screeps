@@ -29,16 +29,16 @@ module.exports = (function () {
     
     return (spawn, buildInstructions) => {
 
-        var roleCounts = roleCounter();
+        var roleCounts = roleCounter();        
         buildInstructions.order.forEach((roleName, index) => {
             var role = linq.first(roles, r => r.name === roleName);
-            var roleCount = linq.first(roleCounts, rc => rc.role.name === roleName);
+            var roleCount = roleCounts[roleName];
             if (roleCount.count < 1) {
                 tryBuild(role, 'buildInstructions.order[' + index + ']', spawn);
                 return;
             }
             
-            roleCount.count--;
+            roleCounts[roleName] = roleCount - 1;
         });
 
         if (buildInstructions.infinite !== undefined && buildInstructions.infinite !== null) {

@@ -6,7 +6,7 @@ global.roles = require('roles');
 global.creepCommands = require('creepCommands');
 
 const log = global.loggerFactory('main');
-const roleExecutor = require('creepExecutor');
+const creepExecutor = require('creepExecutor');
 const creepSpawner = require('creepSpawner');
 const spawnLocator = require('spawnLocator');
 

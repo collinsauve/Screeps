@@ -1,13 +1,10 @@
 module.exports = (function () {
 
+    const log = loggerFactory("creepExecutor");
     return () => {
-        var creepRole = require('creepExecutor');
-        creepRole(function(creep, role) {
-            role.execution(creep);        
-        });
+        for(var creepName in Game.creeps) {
 
-        Game.creeps.forEach(creep => {
-
+            var creep = Game.creeps[creepName];
             const roleName = creep.memory.role;
             log.debug(() => "executing role for creep " + creepName + " of role " + roleName);
             var role = roles[roleName];
@@ -15,6 +12,6 @@ module.exports = (function () {
                 return;     
             }
             role.execution(creep);
-        });
+        };
     };
 }());
