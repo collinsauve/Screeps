@@ -167,19 +167,18 @@ module.exports = (function () {
     }
 
     function getEnergyIfNeeded(actor) {
-        if (!creepUtil.hasEnergy(actor)) {
-            getEnergy(actor);
-            return true;
-        }
-        return false;
+
+        if (creepUtil.hasEnergy(actor)) return false;
+        getEnergy(actor);
+        return true;
     }
 
     function getEnergyIfNeededAndAvailableEnergyGreaterThan(actor, minimumAvailableEnergy) {
         
-        if (actor.room.energyAvailable >= minimumAvailableEnergy) {
-            return getEnergyIfNeeded(actor);
-        }
-        return true; //TODO: Is this correct?
+        if (creepUtil.hasEnergy(actor)) return false;
+        if (actor.room.energyAvailable < minimumAvailableEnergy) return true;
+        getEnergy(actor);
+        return true;
     }
 
     function harvestEnergyIfNotFull(actor) {
