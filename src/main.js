@@ -3,20 +3,13 @@ global.linq = require('core.linq');
 global.loggerFactory = require('core.loggerFactory');
 global.constants = require('core.constants');
 global.roles = require('roles');
+global.structures = require('structures');
 global.creepCommands = require('creepCommands');
 
 const log = global.loggerFactory('main');
-const creepExecutor = require('creepExecutor');
-const creepSpawner = require('creepSpawner');
-const spawnLocator = require('spawnLocator');
+const executor = require('executor');
 
-const spawn = spawnLocator();
-if (spawn === undefined || spawn === null) {
-    log.warn(() => 'Warning: No spawn found');
-    return;
-}
-
-const buildInstructions = {
+global.buildInstructions = {
     order: [
         'harvester', 'harvester', 'harvester', 'harvester', 
         'builder', 'builder', 'builder', 'builder', 'builder'
@@ -24,5 +17,4 @@ const buildInstructions = {
     //infinite: 'archer'
 };
 
-creepExecutor();
-creepSpawner(spawn, buildInstructions);
+executor();
