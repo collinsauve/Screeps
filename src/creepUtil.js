@@ -56,6 +56,13 @@ module.exports = (function () {
         return _.sum(structure.store) >= structure.storeCapacity;
     }
 
+    function structureHasEnergy(structure) {
+        if (structure.energy !== undefined) {
+            return structure.energy > 0;
+        }
+        return false;
+    }
+
     return {
         // Determines if this creep should chase a hostile creep.
         // Attempts to protect all friendlies within a given radius.
@@ -72,6 +79,7 @@ module.exports = (function () {
         hasEnergy: hasEnergy,
         fullCarry: fullCarry,
         sourceHasEnergy: sourceHasEnergy,
-        structureStorageIsFull: structureStorageIsFull
+        structureStorageIsFull: structureStorageIsFull,
+        structureHasEnergy: structureHasEnergy
     };
 })();

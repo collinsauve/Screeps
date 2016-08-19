@@ -113,6 +113,10 @@ module.exports = (function () {
     function upgradeController(creep) {
 
         var controller = creep.room.controller;
+        if (controller == undefined || controller === null) {
+            return false;
+        }
+
         action(creep, controller, 'upgrading controller', () => {
             creep.moveTo(controller);
             creep.upgradeController(controller);
@@ -125,7 +129,7 @@ module.exports = (function () {
         //TODO: Make this so it is dynamic based on controller level
         //TODO: Find and assign a single builder to upgrade the controller.  
         //      This will currently send all builders over to the controller to upgrade it.
-        if (controller.ticksToDowngrade < 4000) {
+        if (controller !== undefined && controller !== null && controller.ticksToDowngrade < 4000) {
             action(creep, controller, 'reset controller', () => {
                 creep.moveTo(controller);
                 creep.upgradeController(controller);
@@ -136,7 +140,8 @@ module.exports = (function () {
     }
 
     function getEnergy(creep) {
-        const target = Game.spawns.Spawn1;
+
+        const target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy });        
         action(creep, target, 'getting energy', () => {
             creep.moveTo(target);
             creep.withdraw(target, RESOURCE_ENERGY);
@@ -155,7 +160,7 @@ module.exports = (function () {
         
         if(creepUtil.fullCarry(creep)) return false;
         
-        var target = creep.pos.findClosestByPath(FIND_SOURCES, { filter: creepUtil.sourceHasEnergy });
+        const target = creep.pos.findClosestByPath(FIND_SOURCES, { filter: creepUtil.sourceHasEnergy });
         if (target !== undefined && target !== null) {
             action(creep, target, 'harvesting', () => {
                 creep.moveTo(target);
