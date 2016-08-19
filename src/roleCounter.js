@@ -14,10 +14,14 @@ module.exports = (function () {
             if (count === undefined) count = 0;
             roleCounts[roleName] = count + 1;
         }
-        roleCounts.forEach(() => {
-            log.debug(() => roleCount.role.name + ' = ' + roleCount.count);
+
+        log.debug(() => {
+            var msg = "";
+            for(var roleName in roleCounts) {
+                msg = msg + ", " + name + '=' + roleCount.count;
+            }
+            return msg;
         });
-        
         return roleCounts;
     }
 }());
