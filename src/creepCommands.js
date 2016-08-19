@@ -178,7 +178,7 @@ module.exports = (function () {
         
         if (creepUtil.fullCarry(actor)) return false;
         
-        const success = actionNearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.sourceHasEnergy }, 'harvesting', target => {
+        const success = actionNearest(actor, FIND_SOURCES, { filter: creepUtil.sourceHasEnergy }, 'harvesting', target => {
             actor.moveTo(target);
             actor.harvest(target);
         });
