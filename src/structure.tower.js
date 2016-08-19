@@ -4,7 +4,8 @@ module.exports = (function () {
     
     function execution(tower) {
         
-        //TODO: If no resources, don't do anything
+        if (tower.energy < 10) return;
+
         //TODO: Attack hostiles
         creepCommands.healAnyDamagedFriendlyInRoom(tower) ||
         creepCommands.repairAnyStructureInRoom(tower) ||

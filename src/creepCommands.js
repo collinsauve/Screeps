@@ -43,95 +43,113 @@ module.exports = (function () {
         return true;   
     }
 
-    function attack(creep, target) {
-        if (!creep.pos.inRangeTo(target.pos, creepUtil.firingRange(creep))) {
-            creep.moveTo(target);
+    function attack(actor, target) {
+        //TODO: Structures can't move
+        if (!actor.pos.inRangeTo(target.pos, creepUtil.firingRange(actor))) {
+            actor.moveTo(target);
         }
-        creep.attack(target);
-        creep.rangedAttack(target); 
+        actor.attack(target);
+        actor.rangedAttack(target); 
     }
 
-    function attackNearest(creep, gameType, opts, messageType) {
-        return actionNearest(creep, gameType, opts, 'attacking ' + messageType, function(target) {
-            attack(creep, target);
+    function attackNearest(actor, gameType, opts, messageType) {
+        return actionNearest(actor, gameType, opts, 'attacking ' + messageType, function(target) {
+            attack(actor, target);
         });
     }
 
-    function attackAny(creep, gameType, opts, messageType) {
-        return actionAny(creep, gameType, opts, 'attacking ' + messageType, function (target) {
-            attack(creep, target);
+    function attackAny(actor, gameType, opts, messageType) {
+        return actionAny(actor, gameType, opts, 'attacking ' + messageType, function (target) {
+            attack(actor, target);
         });
     }
 
-    function moveToNearest(creep, gameType, opts, messageType) {
-        return actionNearest(creep, gameType, opts, 'moving to ' + messageType, function (target) {
-            creep.moveTo(target);
+    function moveToNearest(actor, gameType, opts, messageType) {
+        return actionNearest(actor, gameType, opts, 'moving to ' + messageType, function (target) {
+            actor.moveTo(target);
         });    
     }
 
-    function attackNearestHostileCreep(creep) {
-        return attackNearest(creep, FIND_HOSTILE_CREEPS, { filter: creepUtil.shouldChaseFilter(creep, protectionRadius) }, 'creep');
+    function attackAnyHostileCreep(actor) {
+        return attackAny(actor, FIND_HOSTILE_CREEPS, null, 'creep');
+    }
+    
+    function attackNearestHostileCreep(actor) {
+        return attackNearest(actor, FIND_HOSTILE_CREEPS, { filter: creepUtil.shouldChaseFilter(actor, protectionRadius) }, 'creep');
     }
 
-    function attackNearestHostileSpawn(creep) {
-        return attackNearest(creep, FIND_HOSTILE_SPAWNS, { ignoreCreeps: true }, 'spawn');
+    function attackNearestHostileStructure(actor) {
+        return attackNearest(actor, FIND_HOSTILE_SPAWNS, { ignoreCreeps: true }, 'spawn');
     }
 
-    function attackAnyHostileSpawn(creep) {
-        return attackAny(creep, FIND_HOSTILE_SPAWNS, null, 'spawn');
+    function attackNearestHostileSpawn(actor) {
+        return attackNearest(actor, FIND_HOSTILE_SPAWNS, { ignoreCreeps: true }, 'spawn');
     }
 
-    function healNearestDamagedFriendly(creep) {
-        function damagedFriendlyFilter(t) { return t.hits < t.hitsMax && creep.name !== t.name; }
-        return actionNearest(creep, FIND_MY_CREEPS, { filter: damagedFriendlyFilter }, 'healing', function(target) {
-            creep.moveTo(target);
-            creep.heal(target);
+    function attackAnyHostileSpawn(actor) {
+        return attackAny(actor, FIND_HOSTILE_SPAWNS, null, 'spawn');
+    }
+
+    function attackAnyHostileStructure(actor) {
+        return attackAny(actor, FIND_HOSTILE_STRUCTURES, null, 'structure');
+    }
+
+    function healNearestDamagedFriendly(actor) {
+        //TODO: Requires actor to have a "name", therefore does not work for structures
+        function damagedFriendlyFilter(t) { return t.hits < t.hitsMax && actor.name !== t.name; }
+        return actionNearest(actor, FIND_MY_CREEPS, { filter: damagedFriendlyFilter }, 'healing', function(target) {
+            //TODO: Structures can't move
+            actor.moveTo(target);
+            actor.heal(target);
         });
     }
 
-    function returnToNearestFlag(creep) {
+    function returnToNearestFlag(actor) {
         return moveToNearest(creep, FIND_FLAGS, { ignoreCreeps: true }, 'flag');
     }
 
-    function returnToNearestSpawn(creep) {
-        return moveToNearest(creep, FIND_MY_SPAWNS, { ignoreCreeps: true }, 'spawn');
+    function returnToNearestSpawn(actor) {
+        return moveToNearest(actor, FIND_MY_SPAWNS, { ignoreCreeps: true }, 'spawn');
 
     }
 
-    function followClosestFriendlyRole(creep, targetRole) {
+    function followClosestFriendlyRole(actor, targetRole) {
         function roleFilter(t) { return t.memory.role == targetRole; }
-        return moveToNearest(creep, FIND_MY_CREEPS, { filter: roleFilter }, targetRole);
+        return moveToNearest(actor, FIND_MY_CREEPS, { filter: roleFilter }, targetRole);
     }
 
-    function buildClosestConstructionSite(creep) {
-        return actionNearest(creep, FIND_CONSTRUCTION_SITES, null, 'building', function(target) {
-            creep.moveTo(target);
-            creep.build(target);
+    function buildClosestConstructionSite(actor) {
+        return actionNearest(actor, FIND_CONSTRUCTION_SITES, null, 'building', function(target) {
+            //TODO: Structures can't move
+            actor.moveTo(target);
+            actor.build(target);
         });
     }
 
-    function upgradeController(creep) {
+    function upgradeController(actor) {
 
-        var controller = creep.room.controller;
+        var controller = actor.room.controller;
         if (controller == undefined || controller === null) {
             return false;
         }
 
-        action(creep, controller, 'upgrading controller', () => {
-            creep.moveTo(controller);
-            creep.upgradeController(controller);
+        action(actor, controller, 'upgrading controller', () => {
+            //TODO: Structures can't move
+            actor.moveTo(controller);
+            actor.upgradeController(controller);
         });
         return true;
     }
 
-    function resetControllerDowngrade(creep) {
-        var controller = creep.room.controller;
+    function resetControllerDowngrade(actor) {
+        var controller = actor.room.controller;
         //TODO: Make this so it is dynamic based on controller level
         //TODO: Find and assign a single builder to upgrade the controller.  
         //      This will currently send all builders over to the controller to upgrade it.
         if (controller !== undefined && controller !== null && controller.ticksToDowngrade < 4000) {
-            action(creep, controller, 'reset controller', () => {
-                creep.moveTo(controller);
+            action(actor, controller, 'reset controller', () => {
+                //TODO: Structures can't move
+                actor.moveTo(controller);
                 creep.upgradeController(controller);
             });
             return true;
@@ -139,37 +157,34 @@ module.exports = (function () {
         return false;
     }
 
-    function getEnergy(creep) {
+    function getEnergy(actor) {
 
-        const target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy });        
-        return actionNearest(creep, FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy }, 'getting energy', () => {
+        return actionNearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy }, 'getting energy', target => {
+            //TODO: Structures can't move
             creep.moveTo(target);
             creep.withdraw(target, RESOURCE_ENERGY);
         });
     }
 
-    function getEnergyIfNeeded(creep) {
-        if (!creepUtil.hasEnergy(creep)) {
-            getEnergy(creep);
+    function getEnergyIfNeeded(actor) {
+        if (!creepUtil.hasEnergy(actor)) {
+            getEnergy(actor);
             return true;
         }
         return false;
     }
 
-    function harvestEnergyIfNotFull(creep) {
+    function harvestEnergyIfNotFull(actor) {
         
-        if(creepUtil.fullCarry(creep)) return false;
+        if (creepUtil.fullCarry(actor)) return false;
         
-        const target = creep.pos.findClosestByPath(FIND_SOURCES, { filter: creepUtil.sourceHasEnergy });
-        if (target !== undefined && target !== null) {
-            action(creep, target, 'harvesting', () => {
-                creep.moveTo(target);
-                creep.harvest(target);
-            });
-            return true;
-        } 
-        log.info(() => "could not find source with remaining energy");
-        return false;
+        const success = actionNearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.sourceHasEnergy }, 'harvesting', target => {
+            creep.moveTo(target);
+            creep.harvest(target);
+        });
+
+        if (success === false) log.info(() => "could not find source with remaining energy");
+        return success;
     }
 
     function storeEnergyIfAny(creep) {
@@ -219,9 +234,11 @@ module.exports = (function () {
     }
 
     return {
+        attackAnyHostileCreep: attackAnyHostileCreep,
         attackNearestHostileCreep: attackNearestHostileCreep,
         attackNearestHostileSpawn: attackNearestHostileSpawn,
         attackAnyHostileSpawn: attackAnyHostileSpawn,
+        attackAnyHostileStructure: attackAnyHostileStructure,
         healNearestDamagedFriendly: healNearestDamagedFriendly,
         returnToNearestFlag: returnToNearestFlag,
         returnToNearestSpawn: returnToNearestSpawn,
