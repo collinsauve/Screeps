@@ -194,7 +194,7 @@ module.exports = (function () {
     }
 
     function healAnyDamagedFriendlyInRoom(tower) {
-        return actionAny(tower, FIND_MY_CREEPS, { filter: target.hits < target.hitsMax }, 'healing', function(target) {
+        return actionAny(tower, FIND_MY_CREEPS, { filter: target => target.hits < target.hitsMax }, 'healing', function(target) {
             actor.heal(target);            
         });
     }
