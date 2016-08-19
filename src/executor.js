@@ -15,7 +15,7 @@ module.exports = (function () {
 
         for(const structureId in Game.structures) {
             const structure = Game.structures[structureId];
-            const structureRunner = structures[structure.structureType] 
+            const structureRunner = structureRunners[structure.structureType] 
             if (structureRunner !== undefined && structureRunner !== null) {
                 log.debug(() => "executing structure " + structure.structureType + " " + structureId);
                 structureRunner.execution(structure);
