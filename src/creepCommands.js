@@ -24,22 +24,22 @@ module.exports = (function () {
         return true;   
     }
 
-    function actionAny(creep, gameType, opts, actionMessage, actionFunction) {
-        var targets = creep.room.find(gameType, opts);
+    function actionAny(actor, gameType, opts, actionMessage, actionFunction) {
+        var targets = actor.room.find(gameType, opts);
         if (!targets.length) {
             return false;
         }
         
-        action(creep, targets[0], actionMessage, actionFunction);
+        action(actor, targets[0], actionMessage, actionFunction);
         return true;  
     }
 
-    function actionNearest(creep, gameType, opts, actionMessage, actionFunction) {
-        var target = creep.pos.findClosestByPath(gameType, opts);
+    function actionNearest(actor, gameType, opts, actionMessage, actionFunction) {
+        var target = actor.pos.findClosestByPath(gameType, opts);
         if (target === undefined || target === null) {
             return false;
         }
-        action(creep, target, actionMessage, actionFunction);
+        action(actor, target, actionMessage, actionFunction);
         return true;   
     }
 
@@ -142,7 +142,7 @@ module.exports = (function () {
     function getEnergy(creep) {
 
         const target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy });        
-        action(creep, target, 'getting energy', () => {
+        return actionNearest(creep, FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy }, 'getting energy', () => {
             creep.moveTo(target);
             creep.withdraw(target, RESOURCE_ENERGY);
         });
