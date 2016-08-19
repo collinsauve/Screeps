@@ -1,6 +1,6 @@
 module.exports = (function () {
     
-    var creepCommands = require('creepCommands');
+    //const log = loggerFactory('role.archer');
     return {
         name: 'archer',
         body: [TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, MOVE, RANGED_ATTACK],

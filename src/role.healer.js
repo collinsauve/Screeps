@@ -1,6 +1,6 @@
 module.exports = (function () {
 
-    var creepCommands = require('creepCommands');
+    //const log = loggerFactory('role.healer');
     return {
         name: 'healer',
         body: [MOVE, HEAL],

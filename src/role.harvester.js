@@ -1,7 +1,6 @@
 module.exports = (function () {
     
-    const log = loggerFactory('role_harvester');
-
+    //const log = loggerFactory('role.harvester');
     return {
         name: 'harvester',
         body: [WORK, WORK, CARRY, MOVE],

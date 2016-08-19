@@ -1,5 +1,6 @@
 module.exports = (function () {
-    var creepCommands = require('creepCommands');
+
+    //const log = loggerFactory('role.guard');
     return {
         name: 'guard',
         body: [TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, ATTACK, ATTACK],

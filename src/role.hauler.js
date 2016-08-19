@@ -1,4 +1,6 @@
 module.exports = (function () {
+    
+    //const log = loggerFactory('role.hauler');
     return {
         name: 'hauler',
         body: [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE],
