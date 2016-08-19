@@ -6,6 +6,6 @@ module.exports = (function () {
         'tower'
     ];
 
-    const roles = _.map(roleNames, rn => require('role.' + rn));
+    const roles = _.map(roleNames, rn => require('structure.' + rn));
     return linq.keyBy(roles, 'name');
 }());
