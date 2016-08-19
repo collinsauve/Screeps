@@ -193,6 +193,12 @@ module.exports = (function () {
         });
     }
 
+    function repairAnyRoadInRoom(tower) {
+        return actionAny(tower, FIND_STRUCTURES, { filter: s => s.structureType == STRUCTURE_ROAD && s.hits < s.hitsMax }, 'repairing', function(target) {
+            actor.repair(target);            
+        });
+    }
+
     function healAnyDamagedFriendlyInRoom(tower) {
         return actionAny(tower, FIND_MY_CREEPS, { filter: target => target.hits < target.hitsMax }, 'healing', function(target) {
             actor.heal(target);            
@@ -215,6 +221,7 @@ module.exports = (function () {
         harvestEnergyIfNotFull: harvestEnergyIfNotFull,
         storeEnergyIfAny: storeEnergyIfAny,
         repairAnyStructureInRoom: repairAnyStructureInRoom,
-        healAnyDamagedFriendlyInRoom: healAnyDamagedFriendlyInRoom
+        healAnyDamagedFriendlyInRoom: healAnyDamagedFriendlyInRoom,
+        repairAnyRoadInRoom: repairAnyRoadInRoom
     };
 }());

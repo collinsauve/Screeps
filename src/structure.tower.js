@@ -7,7 +7,8 @@ module.exports = (function () {
         //TODO: If no resources, don't do anything
         //TODO: Attack hostiles
         creepCommands.healAnyDamagedFriendlyInRoom(tower) ||
-        creepCommands.repairAnyStructureInRoom(tower)
+        creepCommands.repairAnyStructureInRoom(tower) ||
+        creepCommands.repairAnyRoadInRoom(tower)
     };
 
     return {
