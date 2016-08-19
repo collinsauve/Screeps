@@ -3,7 +3,11 @@ module.exports = (function () {
     //const log = loggerFactory("structure.tower");
     
     function execution(tower) {
-
+        
+        //TODO: If no resources, don't do anything
+        //TODO: Attack hostiles
+        creepCommands.healAnyDamagedFriendlyInRoom(tower) ||
+        creepCommands.repairAnyStructureInRoom(tower)
     };
 
     return {
