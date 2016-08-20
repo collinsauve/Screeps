@@ -12,13 +12,13 @@ module.exports = (function () {
     }
 
     function attackNearest(actor, gameType, opts, messageType) {
-        return actionNearest(actor, gameType, opts, 'attacking ' + messageType, function(target) {
+        return action.nearest(actor, gameType, opts, 'attacking ' + messageType, function(target) {
             attack(actor, target);
         });
     }
 
     function attackAny(actor, gameType, opts, messageType) {
-        return actionAny(actor, gameType, opts, 'attacking ' + messageType, function (target) {
+        return action.any(actor, gameType, opts, 'attacking ' + messageType, function (target) {
             attack(actor, target);
         });
     }

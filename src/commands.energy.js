@@ -2,7 +2,7 @@ module.exports = (function () {
 
     function getEnergy(actor) {
 
-        return actionNearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy }, 'getting energy', target => {
+        return action.nearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy }, 'getting energy', target => {
             //TODO: Structures can't move
             actor.moveTo(target);
             actor.withdraw(target, RESOURCE_ENERGY);
@@ -28,7 +28,7 @@ module.exports = (function () {
         
         if (creepUtil.fullCarry(actor)) return false;
         
-        const success = actionNearest(actor, FIND_SOURCES, { filter: creepUtil.sourceHasEnergy }, 'harvesting', target => {
+        const success = action.nearest(actor, FIND_SOURCES, { filter: creepUtil.sourceHasEnergy }, 'harvesting', target => {
             actor.moveTo(target);
             actor.harvest(target);
         });
@@ -41,7 +41,7 @@ module.exports = (function () {
         
         const storeIn = findSomewhereToStoreEnergy(actor);
         if (storeIn !== undefined && storeIn !== null) {
-            action(actor, storeIn, 'storing energy', () => {
+            action.specific(actor, storeIn, 'storing energy', () => {
                 //TODO: Structures can't move
                 actor.moveTo(storeIn);
                 actor.transfer(storeIn, RESOURCE_ENERGY);

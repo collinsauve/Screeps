@@ -2,7 +2,7 @@ global.util = require('util');
 global.linq = require('core.linq');
 global.loggerFactory = require('core.loggerFactory');
 global.constants = require('core.constants');
-global.actions = require('actions');
+global.action = require('action');
 global.creepUtil = require('creepUtil');
 
 global.roles = util.loadFolder('role', [

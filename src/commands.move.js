@@ -1,7 +1,7 @@
 module.exports = (function () {
 
     function moveToNearest(actor, gameType, opts, messageType) {
-        return actionNearest(actor, gameType, opts, 'moving to ' + messageType, function (target) {
+        return action.nearest(actor, gameType, opts, 'moving to ' + messageType, function (target) {
             actor.moveTo(target);
         });    
     }
