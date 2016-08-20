@@ -42,8 +42,8 @@ module.exports = (function () {
     }
 
     return {
-        specific,
-        any,
-        nearest
+        specific; specific,
+        any: any,
+        nearest: nearest
     };
 });
