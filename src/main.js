@@ -4,7 +4,7 @@ global.loggerFactory = require('core.loggerFactory');
 global.constants = require('core.constants');
 global.action = require('action');
 global.creepUtil = require('creepUtil');
-
+global.bodies = require('bodies');
 global.roles = util.loadFolder('role', [
     'harvester',
     'builder',
@@ -33,7 +33,7 @@ const executor = require('executor');
 
 global.buildInstructions = {
     order: [
-        'harvester', 'harvester', 'harvester', 'harvester', 
+        'harvester', 'harvester', 'harvester', 
         'builder', 'builder', 'builder', 'builder', 'builder'
     ]
     //infinite: 'archer'

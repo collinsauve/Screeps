@@ -58,4 +58,4 @@ module.exports = (function () {
         attackAnyHostileSpawn,
         attackAnyHostileStructure
     };
-});
+}());

@@ -9,20 +9,26 @@ module.exports = (function () {
         return !building && !waiting && (spawn.spawning === undefined || spawn.spawning === null);
     }
     
-    function tryBuild (role, reason, spawn) {
+    function tryBuild (roleName, role, reason, spawn) {
         if (!canBuild(spawn)) {
             return;
-        }    
+        }  
 
-        const canCreate = spawn.canCreateCreep(role.body);
+        // Find the body for this role
+        const bodyName = roleName + "-1";
+        const body = bodies[bodyName]; //TODO: Economy-tracker      
+        if (body === undefined || body === null) {
+            throw "Could not find body " + bodyName; 
+        }
+        const canCreate = spawn.canCreateCreep(body.parts);
         if (canCreate === ERR_NOT_ENOUGH_ENERGY) {
-            log.debug(() => 'Not enough energy to build creep from ' + reason + ' of \'' + role.name + '\'.  ');            
+            log.debug(() => 'Not enough energy to build creep from ' + reason + ' of \'' + role.name + '\' with body \'' + bodyName + '\'.');            
             waiting = true;
             return;
         }
-        const name = role.name + '-' + util.uuid();
+        const name = bodyName + '-' + util.uuid();
         log.info(() => 'Creating creep \'' + name + '\' from ' + reason);
-        spawn.createCreep(role.body, name, { role: role.name });
+        spawn.createCreep(body.parts, name, { role: role.name });
         building = true;
     }
     
@@ -37,7 +43,7 @@ module.exports = (function () {
             var roleCount = roleCounts[roleName];
             if (roleCount === undefined) roleCount = 0;
             if (roleCount < 1) {
-                tryBuild(role, 'buildInstructions.order[' + index + ']', spawn);
+                tryBuild(roleName, role, 'buildInstructions.order[' + index + ']', spawn);
                 return;
             }
             

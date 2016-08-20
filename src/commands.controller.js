@@ -7,7 +7,7 @@ module.exports = (function () {
             return false;
         }
 
-        action.specifc(actor, controller, 'upgrading controller', () => {
+        action.specific(actor, controller, 'upgrading controller', () => {
             //TODO: Structures can't move
             actor.moveTo(controller);
             actor.upgradeController(controller);

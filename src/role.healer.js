@@ -3,8 +3,7 @@ module.exports = (function () {
     //const log = loggerFactory('role.healer');
     return {
         name: 'healer',
-        body: [MOVE, HEAL],
-        execution: function healer(creep) {
+        run: function healer(creep) {
             commands.heal.healNearestDamagedFriendly(creep) ||
             commands.move.followClosestFriendlyRole(creep, 'guard') ||
             commands.move.followClosestFriendlyRole(creep, 'archer') ||

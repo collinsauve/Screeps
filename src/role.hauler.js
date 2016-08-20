@@ -3,8 +3,7 @@ module.exports = (function () {
     //const log = loggerFactory('role.hauler');
     return {
         name: 'hauler',
-        body: [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE],
-        execution: function hauler(creep) {
+        run: function hauler(creep) {
             function minerFilter(t) {
                 return t.memory.role == 'miner';
             }
