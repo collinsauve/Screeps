@@ -2,7 +2,6 @@ global.util = require('util');
 global.linq = require('core.linq');
 global.loggerFactory = require('core.loggerFactory');
 global.constants = require('core.constants');
-global.creepCommands = require('creepCommands');
 global.actions = require('actions');
 global.creepUtil = require('creepUtil');
 
