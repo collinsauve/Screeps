@@ -6,8 +6,8 @@ module.exports = (function () {
         body: [WORK, WORK, CARRY, MOVE],
         execution: function harvester(creep) {
 
-            creepCommands.harvestEnergyIfNotFull(creep) ||
-            creepCommands.storeEnergyIfAny(creep); 
+            commands.energy.harvestEnergyIfNotFull(creep) ||
+            commands.energy.storeEnergyIfAny(creep); 
         }
     };
 }());

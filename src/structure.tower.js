@@ -7,9 +7,9 @@ module.exports = (function () {
         if (tower.energy < 10) return;
 
         //TODO: Attack hostiles
-        creepCommands.healAnyDamagedFriendlyInRoom(tower) ||
-        creepCommands.repairAnyStructureInRoom(tower) ||
-        creepCommands.repairAnyRoadInRoom(tower)
+        commands.heal.healAnyDamagedFriendlyInRoom(tower) ||
+        commands.repair.repairAnyStructureInRoom(tower) ||
+        commands.repair.repairAnyRoadInRoom(tower)
     };
 
     return {

@@ -10,8 +10,19 @@ module.exports = (function () {
         return _.sum(partCosts);
     }
 
+    function loadFolder(folderName, fileNames) {
+        const files = _.map(structureNames, name => {
+            return { 
+                name,
+                contents: require(folderName + '.' + name)
+            };
+        });
+        return linq.keyBy(files, 'name');
+    }
+
     return {
         uuid: uuid,
-        calculateBuildCost: calculateBuildCost
+        calculateBuildCost: calculateBuildCost,
+        loadFolder: loadFolder
     };
 }());

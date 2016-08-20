@@ -5,12 +5,12 @@ module.exports = (function () {
         name: 'archer',
         body: [TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, MOVE, RANGED_ATTACK],
         execution: function guard(creep) {
-            creepCommands.attackNearestHostileCreep(creep) ||
-            creepCommands.attackNearestHostileSpawn(creep) ||
-            creepCommands.followClosestFriendlyRole(creep, 'guard') ||
-            creepCommands.attackAnyHostileSpawn(creep) ||
-            creepCommands.returnToNearestFlag(creep) ||
-            creepCommands.returnToNearestSpawn(creep);
+            commands.attack.attackNearestHostileCreep(creep) ||
+            commands.attack.attackNearestHostileSpawn(creep) ||
+            commands.move.followClosestFriendlyRole(creep, 'guard') ||
+            commands.attack.attackAnyHostileSpawn(creep) ||
+            commands.move.returnToNearestFlag(creep) ||
+            commands.move.returnToNearestSpawn(creep);
         }
     };
 }());

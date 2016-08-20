@@ -5,11 +5,11 @@ module.exports = (function () {
         name: 'guard',
         body: [TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, ATTACK, ATTACK],
         execution: function guard(creep) {
-            creepCommands.attackNearestHostileCreep(creep) ||
-            creepCommands.attackNearestHostileSpawn(creep) ||
-            creepCommands.attackAnyHostileSpawn(creep) ||
-            creepCommands.returnToNearestFlag(creep) ||
-            creepCommands.returnToNearestSpawn(creep);
+            commands.attack.attackNearestHostileCreep(creep) ||
+            commands.attack.attackNearestHostileSpawn(creep) ||
+            commands.attack.attackAnyHostileSpawn(creep) ||
+            commands.move.returnToNearestFlag(creep) ||
+            commands.move.returnToNearestSpawn(creep);
         }
     };
 }());

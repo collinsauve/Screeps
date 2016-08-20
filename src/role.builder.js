@@ -5,10 +5,10 @@ module.exports = (function () {
         name: 'builder',
         body: [WORK, CARRY, CARRY, MOVE, MOVE],
         execution: function builder(creep) {		
-            creepCommands.getEnergyIfNeededAndAvailableEnergyGreaterThan(creep, 300) ||
-            creepCommands.resetControllerDowngrade(creep) ||                
-            creepCommands.buildClosestConstructionSite(creep) ||
-            creepCommands.upgradeController(creep);
+            commands.energy.getEnergyIfNeededAndAvailableEnergyGreaterThan(creep, 300) ||
+            commands.controller.resetControllerDowngrade(creep) ||                
+            commands.build.buildClosestConstructionSite(creep) ||
+            commands.controller.upgradeController(creep);
         }
     };
 }());
