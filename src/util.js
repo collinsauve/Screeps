@@ -11,13 +11,12 @@ module.exports = (function () {
     }
 
     function loadFolder(folderName, fileNames) {
-        const files = _.map(fileNames, name => {
-            return { 
-                name,
-                contents: require(folderName + '.' + name)
-            };
+        
+        var result = {};
+        _.forEach(fileNames, name => {
+            result[name] = require(folderName + '.' + name);
         });
-        return linq.keyBy(files, 'name');
+        return result;
     }
 
     return {
