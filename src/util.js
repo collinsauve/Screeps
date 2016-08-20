@@ -11,7 +11,7 @@ module.exports = (function () {
     }
 
     function loadFolder(folderName, fileNames) {
-        const files = _.map(structureNames, name => {
+        const files = _.map(fileNames, name => {
             return { 
                 name,
                 contents: require(folderName + '.' + name)
