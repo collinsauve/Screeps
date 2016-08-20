@@ -5,6 +5,8 @@ global.constants = require('core.constants');
 global.action = require('action');
 global.creepUtil = require('creepUtil');
 global.bodies = require('bodies');
+global.roomData = require('roomData');
+
 global.roles = util.loadFolder('role', [
     'harvester',
     'builder',
@@ -34,7 +36,7 @@ const executor = require('executor');
 global.buildInstructions = {
     order: [
         'harvester', 'harvester', 'harvester', 
-        'builder', 'builder', 'builder', 'builder', 'builder'
+        'builder', 'builder'//, 'builder'
     ]
     //infinite: 'archer'
 };

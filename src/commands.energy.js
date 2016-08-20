@@ -19,7 +19,7 @@ module.exports = (function () {
     function getEnergyIfNeededAndAvailableEnergyGreaterThan(actor, minimumAvailableEnergy) {
         
         if (creepUtil.hasEnergy(actor)) return false;
-        if (actor.room.energyAvailable < minimumAvailableEnergy) return true;
+        if (roomData.get(actor.room).energyAvailable < minimumAvailableEnergy) return true;
         getEnergy(actor);
         return true;
     }

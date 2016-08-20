@@ -4,7 +4,7 @@ module.exports = (function () {
     return {
         name: 'builder',
         run: function builder(creep) {		
-            commands.energy.getEnergyIfNeededAndAvailableEnergyGreaterThan(creep, 0) ||
+            commands.energy.getEnergyIfNeededAndAvailableEnergyGreaterThan(creep, 301) ||
             commands.controller.resetControllerDowngrade(creep) ||                
             commands.build.nearestNonRoad(creep) ||
             commands.build.nearest(creep) ||

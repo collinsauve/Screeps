@@ -4,8 +4,8 @@ module.exports = (function () {
         return constructionSite.structureType === STRUCTURE_ROAD;
     }
 
-    function nearest(actor, filter) {
-        return action.nearest(actor, FIND_MY_CONSTRUCTION_SITES, { filter: filter }, 'building', function(target) {
+    function nearest(actor, objects) {
+        return action.nearest(actor, objects, null, 'building', function(target) {
             //TODO: Structures can't move
             actor.moveTo(target);
             actor.build(target);
@@ -21,9 +21,9 @@ module.exports = (function () {
     }
     
     return {
-        nearest,
-        nearestNonRoad,
-        nearestRoad
+        nearest: (actor) => nearest(actor, roomData.get(actor.room).my.constructionSites.all),
+        nearestNonRoad: (actor) => nearest(actor, roomData.get(actor.room).my.constructionSites.nonRoad),
+        nearestRoad: (actor) => nearest(actor, roomData.get(actor.room).my.constructionSites.road)
     };
 }());
 
