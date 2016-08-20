@@ -50,10 +50,14 @@ module.exports = (function () {
     }
 
     function structureStorageIsFull(structure) {
+
         if (structure.energy !== undefined) {
             return structure.energy >= structure.energyCapacity;
         }
-        return _.sum(structure.store) >= structure.storeCapacity;
+        if (structure.store !== undefined) {
+            return _.sum(structure.store) >= structure.storeCapacity;
+        }        
+        return true;
     }
 
     function structureHasEnergy(structure) {
