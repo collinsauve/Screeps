@@ -5,7 +5,7 @@ global.constants = require('core.constants');
 global.actions = require('actions');
 global.creepUtil = require('creepUtil');
 
-global.roles = util.loadFolder('roles', [
+global.roles = util.loadFolder('role', [
     'harvester',
     'builder',
     'guard',
@@ -14,7 +14,7 @@ global.roles = util.loadFolder('roles', [
     'hauler',
     'archer'
 ]);
-global.structureRunners = util.loadFolder('structures', [
+global.structureRunners = util.loadFolder('structure', [
     'spawn',
     'tower'
 ]);
