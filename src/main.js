@@ -19,7 +19,13 @@ global.structureRunners = util.loadFolder('structure', [
     'tower'
 ]);
 global.commands = util.loadFolder('commands', [
-    'attack'
+    'attack',
+    'build',
+    'controller',
+    'energy',
+    'heal',
+    'move',
+    'repair'
 ]);
 
 const log = global.loggerFactory('main');
