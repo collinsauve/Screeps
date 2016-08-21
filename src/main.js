@@ -35,8 +35,8 @@ const executor = require('executor');
 
 global.buildInstructions = {
     order: [
-        'harvester', 'harvester', 'harvester', 
-        'builder', 'builder'//, 'builder'
+        'harvester', 'harvester', 'harvester', 'harvester', 
+        'builder', 'builder', 'builder', 'builder'
     ]
     //infinite: 'archer'
 };

@@ -2,11 +2,21 @@ module.exports = (function () {
 
     function getEnergy(actor) {
 
-        return action.nearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy }, 'getting energy', target => {
+        function act(target) {
             //TODO: Structures can't move
             actor.moveTo(target);
             actor.withdraw(target, RESOURCE_ENERGY);
-        });
+        }
+
+        const rd = roomData.get(actor.room);
+
+        // If there is a container, only get energy from there    
+        if (rd.hasContainer) {
+            return action.nearest(actor, rd.containersWithEnergy, null, 'getting energy', act);    
+        } 
+
+        // Get energy from anywhere
+        return action.nearest(actor, FIND_MY_STRUCTURES, { filter: creepUtil.structureHasEnergy }, 'getting energy', act);
     }
 
     function getEnergyIfNeeded(actor) {
@@ -17,7 +27,7 @@ module.exports = (function () {
     }
 
     function getEnergyIfNeededAndAvailableEnergyGreaterThan(actor, minimumAvailableEnergy) {
-        
+
         if (creepUtil.hasEnergy(actor)) return false;
         if (roomData.get(actor.room).energyAvailable < minimumAvailableEnergy) return true;
         getEnergy(actor);
@@ -52,12 +62,7 @@ module.exports = (function () {
     }
 
     function findSomewhereToStoreEnergy(actor) {
-        const closestSpawn = actor.pos.findClosestByPath(FIND_MY_SPAWNS, { filter: spawn => !creepUtil.structureStorageIsFull(spawn) });
-        if (closestSpawn !== null) {
-            return closestSpawn;            
-        }
-        const closetStructue = actor.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: struct => !creepUtil.structureStorageIsFull(struct)  });
-        return closetStructue;
+        return actor.pos.findClosestByPath(roomData.get(actor.room).storageDestinations);
     }
     
     return {

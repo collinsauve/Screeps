@@ -8,6 +8,8 @@ module.exports = (function () {
             commands.controller.resetControllerDowngrade(creep) ||                
             commands.build.nearestNonRoad(creep) ||
             commands.build.nearest(creep) ||
+            commands.repair.nearestMy(creep) ||
+            commands.repair.nearestNeutral(creep) ||
             commands.controller.upgradeController(creep);
         }
     };

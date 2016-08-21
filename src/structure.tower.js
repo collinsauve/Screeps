@@ -8,8 +8,8 @@ module.exports = (function () {
 
         //TODO: Attack hostiles
         commands.heal.healAnyDamagedFriendlyInRoom(tower) ||
-        commands.repair.repairAnyStructureInRoom(tower) ||
-        commands.repair.repairAnyRoadInRoom(tower)
+        commands.repair.my(tower) ||
+        commands.repair.neutral(tower)
     };
 
     return {

@@ -5,6 +5,7 @@ module.exports = (function () {
     }
 
     function nearest(actor, objects) {
+        
         return action.nearest(actor, objects, null, 'building', function(target) {
             //TODO: Structures can't move
             actor.moveTo(target);

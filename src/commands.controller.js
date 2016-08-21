@@ -16,6 +16,7 @@ module.exports = (function () {
     }
 
     function resetControllerDowngrade(actor) {
+        
         var controller = actor.room.controller;
         //TODO: Make this so it is dynamic based on controller level
         //TODO: Find and assign a single builder to upgrade the controller.  

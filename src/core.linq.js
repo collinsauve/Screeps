@@ -34,8 +34,37 @@ module.exports = (function () {
         return result;
     }
 
+    function any(array, predicate) {
+        for (var index in array) {
+            const item = array[index];
+            if (predicate(item)) return true;
+        }
+        return false;
+    }
+
+    function contains(array, find) {
+        return any(array, i => i === find);
+        return r;
+    }
+
+    function concat(array1, array2) {
+
+        //TODO: Allow mixed arrays and single elements
+        var result = [];
+        for (var index1 in array1) {
+            result.push(array1[index1]);
+        }
+        for (var index2 in array2) {
+            result.push(array2[index2]);
+        }
+        return result;
+    }
+
     return {
         keyBy: keyBy,
+        any,
+        contains,
+        concat,
         map: (array, fn) => array === null || array === undefined ? [] : array.map(fn), 
         selectMany: function (array, fn) {
             var result1 = _.map(array, fn);
