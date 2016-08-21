@@ -64,6 +64,9 @@ module.exports = (function () {
         if (structure.energy !== undefined) {
             return structure.energy > 0;
         }
+        if (structure.store !== undefined) {
+            return structure.store[RESOURCE_ENERGY] > 0;
+        }
         return false;
     }
 
