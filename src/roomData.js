@@ -50,7 +50,7 @@ module.exports = (function () {
             creeps: myCreeps            
         };
         const hasContainer = containers.length > 0;
-        const containersWithEnergy = _.filter(containers, creepUtil.structureStorageIsFull);
+        const containersWithEnergy = _.filter(containers, creepUtil.structureHasEnergy);
 
         return {
             energyAvailable,
